@@ -1,7 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Heart, Clock, Shield, CheckCircle } from "lucide-react";
 
-const CTASection = () => {
+interface CTASectionProps {
+  onOpenForm: () => void;
+}
+
+const CTASection = ({ onOpenForm }: CTASectionProps) => {
   return (
     <section className="py-20 lg:py-28 bg-primary relative overflow-hidden">
       {/* Background Pattern */}
@@ -36,6 +40,7 @@ const CTASection = () => {
               variant="hero"
               size="xl"
               className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-xl"
+              onClick={onOpenForm}
             >
               Check Your Rate Now — Free
               <CheckCircle className="w-5 h-5" />
