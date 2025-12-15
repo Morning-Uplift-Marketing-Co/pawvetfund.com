@@ -37,7 +37,7 @@ const Index = () => {
         <main className="flex-1">
           <HeroSection onOpenForm={handleOpenForm} />
           <TrustBar />
-          <HowItWorks />
+          <HowItWorks onOpenForm={handleOpenForm} />
           <ComparisonSection />
           <TestimonialSection />
           <FAQSection />
