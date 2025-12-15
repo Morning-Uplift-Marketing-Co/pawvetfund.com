@@ -1,6 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Shield, Clock, CheckCircle } from "lucide-react";
-import heroImage from "@/assets/hero-vet.jpg";
+
+// Optimized responsive images with WebP and fallback
+import heroImageWebp from "@/assets/hero-vet.jpg?w=640;960;1280;1920&format=webp&as=srcset";
+import heroImageJpg from "@/assets/hero-vet.jpg?w=640;960;1280;1920&format=jpg&as=srcset";
+import heroImageFallback from "@/assets/hero-vet.jpg?w=1280";
 
 interface HeroSectionProps {
   onOpenForm: () => void;
@@ -9,15 +13,29 @@ interface HeroSectionProps {
 const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
   return (
     <section className="relative min-h-[90vh] flex items-center hero-gradient overflow-hidden">
-      {/* Background Image */}
+      {/* Background Image - Optimized with WebP and responsive srcset */}
       <div className="absolute inset-0 z-0">
-        <img
-          src={heroImage}
-          alt="Veterinarian comforting a dog in a modern clinic"
-          className="w-full h-full object-cover opacity-20"
-          fetchPriority="high"
-          decoding="async"
-        />
+        <picture>
+          <source 
+            srcSet={heroImageWebp} 
+            type="image/webp" 
+            sizes="100vw"
+          />
+          <source 
+            srcSet={heroImageJpg} 
+            type="image/jpeg" 
+            sizes="100vw"
+          />
+          <img
+            src={heroImageFallback}
+            alt="Veterinarian comforting a dog in a modern clinic"
+            className="w-full h-full object-cover opacity-20"
+            fetchPriority="high"
+            decoding="async"
+            width={1280}
+            height={853}
+          />
+        </picture>
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/80" />
       </div>
 
@@ -73,16 +91,30 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
             </div>
           </div>
 
-          {/* Right Content - Visual */}
+          {/* Right Content - Visual with optimized responsive image */}
           <div className="relative hidden lg:block animate-fade-up animation-delay-200">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <img
-                src={heroImage}
-                alt="Veterinarian providing compassionate care to a pet"
-                className="w-full h-auto object-cover"
-                loading="lazy"
-                decoding="async"
-              />
+              <picture>
+                <source 
+                  srcSet={heroImageWebp} 
+                  type="image/webp" 
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <source 
+                  srcSet={heroImageJpg} 
+                  type="image/jpeg" 
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <img
+                  src={heroImageFallback}
+                  alt="Veterinarian providing compassionate care to a pet"
+                  className="w-full h-auto object-cover"
+                  loading="lazy"
+                  decoding="async"
+                  width={1280}
+                  height={853}
+                />
+              </picture>
               {/* Overlay Card */}
               <div className="absolute bottom-6 left-6 right-6 bg-card/95 backdrop-blur-sm rounded-xl p-6 shadow-card">
                 <div className="flex items-center gap-4">
