@@ -47,6 +47,7 @@ const commonUses = [
   { icon: Scissors, text: "Dental Procedures" },
   { icon: Pill, text: "Medication & Refills" },
   { icon: Apple, text: "Pet Food & Supplies" },
+  { icon: Clock, text: "Routine Checkups & Vaccinations" },
 ];
 
 const HowItWorks = ({ onOpenForm }: HowItWorksProps) => {
