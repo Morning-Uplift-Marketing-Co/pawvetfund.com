@@ -2,7 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Shield, Clock, CheckCircle } from "lucide-react";
 import heroImage from "@/assets/hero-vet.jpg";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  onOpenForm: () => void;
+}
+
+const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
   return (
     <section className="relative min-h-[90vh] flex items-center hero-gradient overflow-hidden">
       {/* Background Image */}
@@ -41,11 +45,11 @@ const HeroSection = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="hero" size="xl" className="group">
+              <Button variant="hero" size="xl" className="group" onClick={onOpenForm}>
                 Check Your Rate Now
                 <CheckCircle className="w-5 h-5 transition-transform group-hover:scale-110" />
               </Button>
-              <Button variant="outline" size="xl">
+              <Button variant="outline" size="xl" onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}>
                 See How It Works
               </Button>
             </div>

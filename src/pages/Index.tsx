@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Header from "@/components/landing/Header";
 import HeroSection from "@/components/landing/HeroSection";
 import TrustBar from "@/components/landing/TrustBar";
@@ -7,9 +8,14 @@ import TestimonialSection from "@/components/landing/TestimonialSection";
 import FAQSection from "@/components/landing/FAQSection";
 import CTASection from "@/components/landing/CTASection";
 import Footer from "@/components/landing/Footer";
+import LoanFormDialog from "@/components/loan-form/LoanFormDialog";
 import { Helmet } from "react-helmet-async";
 
 const Index = () => {
+  const [formOpen, setFormOpen] = useState(false);
+
+  const handleOpenForm = () => setFormOpen(true);
+
   return (
     <>
       <Helmet>
@@ -27,18 +33,20 @@ const Index = () => {
       </Helmet>
       
       <div className="min-h-screen flex flex-col">
-        <Header />
+        <Header onOpenForm={handleOpenForm} />
         <main className="flex-1">
-          <HeroSection />
+          <HeroSection onOpenForm={handleOpenForm} />
           <TrustBar />
           <HowItWorks />
           <ComparisonSection />
           <TestimonialSection />
           <FAQSection />
-          <CTASection />
+          <CTASection onOpenForm={handleOpenForm} />
         </main>
         <Footer />
       </div>
+
+      <LoanFormDialog open={formOpen} onOpenChange={setFormOpen} />
     </>
   );
 };

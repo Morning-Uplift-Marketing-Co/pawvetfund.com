@@ -2,7 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Shield, Menu, X } from "lucide-react";
 import { useState } from "react";
 
-const Header = () => {
+interface HeaderProps {
+  onOpenForm: () => void;
+}
+
+const Header = ({ onOpenForm }: HeaderProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -41,7 +45,7 @@ const Header = () => {
 
           {/* CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="hero" size="default">
+            <Button variant="hero" size="default" onClick={onOpenForm}>
               Check Your Rate
             </Button>
           </div>
@@ -85,7 +89,7 @@ const Header = () => {
               >
                 FAQ
               </a>
-              <Button variant="hero" className="mt-2">
+              <Button variant="hero" className="mt-2" onClick={() => { setMobileMenuOpen(false); onOpenForm(); }}>
                 Check Your Rate
               </Button>
             </nav>
