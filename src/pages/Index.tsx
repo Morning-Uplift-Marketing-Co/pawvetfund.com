@@ -38,7 +38,7 @@ const Index = () => {
           <HeroSection onOpenForm={handleOpenForm} />
           <TrustBar />
           <HowItWorks onOpenForm={handleOpenForm} />
-          <ComparisonSection />
+          <ComparisonSection onOpenForm={handleOpenForm} />
           <TestimonialSection />
           <FAQSection />
           <CTASection onOpenForm={handleOpenForm} />
