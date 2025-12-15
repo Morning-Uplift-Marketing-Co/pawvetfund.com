@@ -125,12 +125,12 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-primary-foreground/50">
             <p>© {new Date().getFullYear()} Paw Vet Fund. All rights reserved.</p>
             <div className="flex items-center gap-6">
-              <a href="#" className="hover:text-primary-foreground transition-colors">
+              <Link to="/privacy-policy" className="hover:text-primary-foreground transition-colors">
                 Privacy Policy
-              </a>
-              <a href="#" className="hover:text-primary-foreground transition-colors">
+              </Link>
+              <Link to="/terms-of-service" className="hover:text-primary-foreground transition-colors">
                 Terms of Service
-              </a>
+              </Link>
               <a href="#" className="hover:text-primary-foreground transition-colors">
                 California Privacy Rights
               </a>

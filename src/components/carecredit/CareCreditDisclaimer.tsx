@@ -1,4 +1,5 @@
 import { Shield, AlertCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const CareCreditDisclaimer = () => {
   return (
@@ -62,9 +63,9 @@ const CareCreditDisclaimer = () => {
 
           {/* Bottom Links */}
           <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground pt-4">
-            <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
+            <Link to="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</Link>
             <span className="text-border">|</span>
-            <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
+            <Link to="/terms-of-service" className="hover:text-primary transition-colors">Terms of Service</Link>
             <span className="text-border">|</span>
             <a href="#" className="hover:text-primary transition-colors">California Disclosures</a>
             <span className="text-border">|</span>
