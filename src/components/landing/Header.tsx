@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Shield, Menu, X } from "lucide-react";
+import { PawPrint, Menu, X } from "lucide-react";
 import { useState } from "react";
 
 interface HeaderProps {
@@ -16,7 +16,7 @@ const Header = ({ onOpenForm }: HeaderProps) => {
           {/* Logo */}
           <a href="/" className="flex items-center gap-2">
             <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-              <Shield className="w-5 h-5 text-primary-foreground" />
+              <PawPrint className="w-5 h-5 text-primary-foreground" />
             </div>
             <span className="text-xl font-bold text-foreground">Paw Vet Fund</span>
           </a>

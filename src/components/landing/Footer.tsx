@@ -1,4 +1,4 @@
-import { Shield, Mail, Phone, MapPin } from "lucide-react";
+import { PawPrint, Shield, Mail, Phone, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-                <Shield className="w-5 h-5 text-primary-foreground" />
+                <PawPrint className="w-5 h-5 text-primary-foreground" />
               </div>
               <span className="text-xl font-bold">Paw Vet Fund</span>
             </div>
