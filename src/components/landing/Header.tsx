@@ -18,7 +18,7 @@ const Header = ({ onOpenForm }: HeaderProps) => {
             <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
               <Shield className="w-5 h-5 text-primary-foreground" />
             </div>
-            <span className="text-xl font-bold text-foreground">PetFund</span>
+            <span className="text-xl font-bold text-foreground">Paw Vet Fund</span>
           </a>
 
           {/* Desktop Navigation */}

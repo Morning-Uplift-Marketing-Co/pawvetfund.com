@@ -13,7 +13,7 @@ const Footer = () => {
               <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
                 <Shield className="w-5 h-5 text-primary-foreground" />
               </div>
-              <span className="text-xl font-bold">PetFund</span>
+              <span className="text-xl font-bold">Paw Vet Fund</span>
             </div>
             <p className="text-primary-foreground/70 text-sm max-w-md mb-6">
               We connect pet owners with trusted lenders who can provide fast, 
@@ -76,7 +76,7 @@ const Footer = () => {
             <ul className="space-y-3 text-sm text-primary-foreground/70">
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4" />
-                <span>support@petfund.com</span>
+                <span>support@pawvetfund.com</span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4" />
@@ -123,7 +123,7 @@ const Footer = () => {
       <div className="border-t border-primary-foreground/10">
         <div className="container py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-primary-foreground/50">
-            <p>© {new Date().getFullYear()} PetFund. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Paw Vet Fund. All rights reserved.</p>
             <div className="flex items-center gap-6">
               <a href="#" className="hover:text-primary-foreground transition-colors">
                 Privacy Policy
