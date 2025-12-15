@@ -20,6 +20,7 @@ const ScratchpayAlternative = () => {
           name="description" 
           content="Vet doesn't accept Scratchpay? Get a personal cash loan instead. Use at any veterinarian, flexible terms up to 72 months, funds deposited to your bank." 
         />
+        <link rel="canonical" href="https://pawvetfund.com/scratchpay-alternative" />
       </Helmet>
       
       <div className="min-h-screen bg-background">
