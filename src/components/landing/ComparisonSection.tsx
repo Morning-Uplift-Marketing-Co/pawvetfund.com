@@ -4,39 +4,51 @@ import { Button } from "@/components/ui/button";
 const comparisonData = [
   {
     feature: "Use at ANY vet clinic",
-    ourLoans: true,
-    creditCard: true,
+    pawVetFund: true,
     careCredit: false,
+    scratchpay: false,
   },
   {
     feature: "Cash in hand (negotiate discounts)",
-    ourLoans: true,
-    creditCard: false,
+    pawVetFund: true,
     careCredit: false,
+    scratchpay: false,
   },
   {
-    feature: "High approval odds for all credit types",
-    ourLoans: true,
-    creditCard: false,
+    feature: "All credit types accepted",
+    pawVetFund: true,
     careCredit: false,
+    scratchpay: "Limited",
   },
   {
     feature: "Fixed monthly payments",
-    ourLoans: true,
-    creditCard: false,
+    pawVetFund: true,
     careCredit: "Partial",
+    scratchpay: true,
   },
   {
     feature: "No deferred interest traps",
-    ourLoans: true,
-    creditCard: true,
+    pawVetFund: true,
     careCredit: false,
+    scratchpay: true,
+  },
+  {
+    feature: "No down payment required",
+    pawVetFund: true,
+    careCredit: true,
+    scratchpay: "Often Required",
+  },
+  {
+    feature: "Terms up to 72 months",
+    pawVetFund: true,
+    careCredit: false,
+    scratchpay: false,
   },
   {
     feature: "Soft credit check (no score impact)",
-    ourLoans: true,
-    creditCard: false,
+    pawVetFund: true,
     careCredit: false,
+    scratchpay: true,
   },
 ];
 
@@ -75,7 +87,7 @@ const ComparisonSection = () => {
             Cash Gives You <span className="text-primary">More Options</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Unlike store credit cards, a personal loan gives you cash in hand — 
+            Unlike medical credit cards, our financing gives you cash in hand — 
             so you can negotiate with your vet, shop around, or cover medications too.
           </p>
         </div>
@@ -87,16 +99,16 @@ const ComparisonSection = () => {
             <div className="grid grid-cols-4 gap-4 p-6 bg-primary/5 border-b border-border">
               <div className="font-medium text-muted-foreground">Feature</div>
               <div className="text-center">
-                <div className="font-bold text-primary">Our Loans</div>
-                <div className="text-xs text-muted-foreground">Personal Loan</div>
-              </div>
-              <div className="text-center">
-                <div className="font-semibold text-foreground">Credit Cards</div>
-                <div className="text-xs text-muted-foreground">High Interest</div>
+                <div className="font-bold text-primary">Paw Vet Fund</div>
+                <div className="text-xs text-muted-foreground">Cash Funding</div>
               </div>
               <div className="text-center">
                 <div className="font-semibold text-foreground">CareCredit</div>
-                <div className="text-xs text-muted-foreground">Store Card</div>
+                <div className="text-xs text-muted-foreground">Medical Card</div>
+              </div>
+              <div className="text-center">
+                <div className="font-semibold text-foreground">Scratchpay</div>
+                <div className="text-xs text-muted-foreground">Vet Financing</div>
               </div>
             </div>
 
@@ -108,9 +120,9 @@ const ComparisonSection = () => {
                   className="grid grid-cols-4 gap-4 p-6 items-center hover:bg-muted/50 transition-colors"
                 >
                   <div className="text-sm md:text-base font-medium">{row.feature}</div>
-                  <div className="flex justify-center">{renderValue(row.ourLoans)}</div>
-                  <div className="flex justify-center">{renderValue(row.creditCard)}</div>
+                  <div className="flex justify-center">{renderValue(row.pawVetFund)}</div>
                   <div className="flex justify-center">{renderValue(row.careCredit)}</div>
+                  <div className="flex justify-center">{renderValue(row.scratchpay)}</div>
                 </div>
               ))}
             </div>

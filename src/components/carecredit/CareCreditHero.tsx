@@ -24,8 +24,8 @@ const CareCreditHero = ({ onOpenForm }: CareCreditHeroProps) => {
 
           {/* Subheadline */}
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 text-balance">
-            Don't let a rejection letter stop your pet's treatment. Get a{" "}
-            <strong className="text-foreground">personal cash loan</strong> instead. 
+            Don't let a rejection letter stop your pet's treatment. Get{" "}
+            <strong className="text-foreground">cash funding</strong> instead. 
             Approval odds are higher, and funds work at{" "}
             <strong className="text-foreground">ANY vet</strong>.
           </p>

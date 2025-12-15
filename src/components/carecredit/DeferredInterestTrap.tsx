@@ -74,7 +74,7 @@ const DeferredInterestTrap = () => {
               <CardContent className="p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <DollarSign className="w-6 h-6 text-trust" />
-                  <h4 className="font-semibold text-lg">Our Personal Loans</h4>
+                  <h4 className="font-semibold text-lg">Paw Vet Fund</h4>
                 </div>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-2 text-sm text-muted-foreground">
