@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { PawPrint, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface HeaderProps {
   onOpenForm: () => void;
@@ -41,6 +42,12 @@ const Header = ({ onOpenForm }: HeaderProps) => {
             >
               FAQ
             </a>
+            <Link
+              to="/about"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            >
+              About
+            </Link>
           </nav>
 
           {/* CTA */}
@@ -89,6 +96,13 @@ const Header = ({ onOpenForm }: HeaderProps) => {
               >
                 FAQ
               </a>
+              <Link
+                to="/about"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                About
+              </Link>
               <Button variant="hero" className="mt-2" onClick={() => { setMobileMenuOpen(false); onOpenForm(); }}>
                 Check Your Rate
               </Button>
