@@ -1,11 +1,12 @@
 import { Shield, Mail, Phone, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <footer className="bg-foreground text-primary-foreground">
       {/* Main Footer */}
       <div className="container py-12 lg:py-16">
-        <div className="grid md:grid-cols-4 gap-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
@@ -48,6 +49,23 @@ const Footer = () => {
                 <a href="#" className="hover:text-primary-foreground transition-colors">
                   About Us
                 </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Alternatives */}
+          <div>
+            <h4 className="font-semibold mb-4">Alternatives</h4>
+            <ul className="space-y-3 text-sm text-primary-foreground/70">
+              <li>
+                <Link to="/carecredit-alternative" className="hover:text-primary-foreground transition-colors">
+                  CareCredit Alternative
+                </Link>
+              </li>
+              <li>
+                <Link to="/scratchpay-alternative" className="hover:text-primary-foreground transition-colors">
+                  Scratchpay Alternative
+                </Link>
               </li>
             </ul>
           </div>
