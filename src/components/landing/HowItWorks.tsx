@@ -117,10 +117,6 @@ const HowItWorks = ({ onOpenForm }: HowItWorksProps) => {
           ))}
         </div>
 
-        {/* Timeline Connector for Desktop */}
-        <div className="hidden lg:block relative max-w-4xl mx-auto -mt-[calc(theme(spacing.20)+theme(spacing.12)*2)] mb-20 pointer-events-none">
-          <div className="absolute left-24 top-0 bottom-0 w-px bg-gradient-to-b from-primary/20 via-primary/10 to-primary/20" />
-        </div>
 
         {/* Common Uses Section */}
         <div className="max-w-4xl mx-auto animate-fade-up">
