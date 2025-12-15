@@ -71,50 +71,63 @@ const HowItWorks = ({ onOpenForm }: HowItWorksProps) => {
           </Button>
         </div>
 
-        {/* Steps */}
-        <div className="space-y-8 lg:space-y-12 max-w-4xl mx-auto mb-20">
-          {steps.map((step, index) => (
-            <Card
-              key={step.number}
-              className="animate-fade-up overflow-hidden"
-              style={{ animationDelay: `${index * 150}ms` }}
-            >
-              <CardContent className="p-0">
-                <div className="flex flex-col lg:flex-row">
-                  {/* Step Number & Icon */}
-                  <div className="lg:w-48 bg-primary/5 p-6 lg:p-8 flex flex-row lg:flex-col items-center justify-center gap-4">
-                    <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center">
-                      <step.icon className="w-8 h-8 text-primary" />
+        {/* Steps with Timeline */}
+        <div className="relative max-w-4xl mx-auto mb-20">
+          {/* Timeline Line (Desktop only) */}
+          <div className="hidden lg:block absolute left-[6rem] top-12 bottom-12 w-0.5 bg-gradient-to-b from-primary/10 via-primary/30 to-primary/10" />
+          
+          <div className="space-y-8 lg:space-y-0">
+            {steps.map((step, index) => (
+              <div key={step.number}>
+                <Card
+                  className="animate-fade-up overflow-hidden relative z-10 bg-card"
+                  style={{ animationDelay: `${index * 150}ms` }}
+                >
+                  <CardContent className="p-0">
+                    <div className="flex flex-col lg:flex-row">
+                      {/* Step Number & Icon */}
+                      <div className="lg:w-48 bg-primary/5 p-6 lg:p-8 flex flex-row lg:flex-col items-center justify-center gap-4">
+                        <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center">
+                          <step.icon className="w-8 h-8 text-primary" />
+                        </div>
+                        <span className="text-5xl font-bold text-primary/20">{step.number}</span>
+                      </div>
+
+                      {/* Content */}
+                      <div className="flex-1 p-6 lg:p-8">
+                        <h3 className="text-xl lg:text-2xl font-bold mb-3">{step.title}</h3>
+                        <p className="text-muted-foreground mb-4">
+                          {step.description}
+                          {step.amount && (
+                            <span className="font-semibold text-foreground"> (from {step.amount})</span>
+                          )}
+                        </p>
+
+                        {/* Benefits */}
+                        <ul className="space-y-3">
+                          {step.benefits.map((benefit, i) => (
+                            <li key={i} className="flex items-start gap-3">
+                              <div className="w-6 h-6 rounded-full bg-trust/10 flex items-center justify-center shrink-0 mt-0.5">
+                                <benefit.icon className="w-3.5 h-3.5 text-trust" />
+                              </div>
+                              <span className="text-sm text-muted-foreground">{benefit.text}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
-                    <span className="text-5xl font-bold text-primary/20">{step.number}</span>
+                  </CardContent>
+                </Card>
+                
+                {/* Connector between cards (Desktop only) */}
+                {index < steps.length - 1 && (
+                  <div className="hidden lg:flex items-center justify-start pl-[5.25rem] h-8">
+                    <div className="w-3 h-3 rounded-full bg-primary/40 ring-4 ring-primary/10" />
                   </div>
-
-                  {/* Content */}
-                  <div className="flex-1 p-6 lg:p-8">
-                    <h3 className="text-xl lg:text-2xl font-bold mb-3">{step.title}</h3>
-                    <p className="text-muted-foreground mb-4">
-                      {step.description}
-                      {step.amount && (
-                        <span className="font-semibold text-foreground"> (from {step.amount})</span>
-                      )}
-                    </p>
-
-                    {/* Benefits */}
-                    <ul className="space-y-3">
-                      {step.benefits.map((benefit, i) => (
-                        <li key={i} className="flex items-start gap-3">
-                          <div className="w-6 h-6 rounded-full bg-trust/10 flex items-center justify-center shrink-0 mt-0.5">
-                            <benefit.icon className="w-3.5 h-3.5 text-trust" />
-                          </div>
-                          <span className="text-sm text-muted-foreground">{benefit.text}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                )}
+              </div>
+            ))}
+          </div>
         </div>
 
 
