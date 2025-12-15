@@ -20,6 +20,7 @@ const CareCreditAlternative = () => {
           name="description" 
           content="Denied by CareCredit? Get a personal cash loan for vet bills instead. Higher approval odds, fixed interest rates, and use at any veterinary clinic." 
         />
+        <link rel="canonical" href="https://pawvetfund.com/carecredit-alternative" />
       </Helmet>
       
       <div className="min-h-screen bg-background">

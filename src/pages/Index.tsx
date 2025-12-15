@@ -29,7 +29,7 @@ const Index = () => {
           property="og:description"
           content="Don't let money stand between your pet and care. Get funds in 24 hours for vet bills up to $10,000."
         />
-        <link rel="canonical" href="https://petfund.com" />
+        <link rel="canonical" href="https://pawvetfund.com" />
       </Helmet>
       
       <div className="min-h-screen flex flex-col">
