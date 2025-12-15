@@ -10,6 +10,8 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import CareCreditAlternative from "./pages/CareCreditAlternative";
 import ScratchpayAlternative from "./pages/ScratchpayAlternative";
+import CaliforniaPrivacyRights from "./pages/CaliforniaPrivacyRights";
+import DoNotSellMyInfo from "./pages/DoNotSellMyInfo";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +30,8 @@ const App = () => (
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/carecredit-alternative" element={<CareCreditAlternative />} />
             <Route path="/scratchpay-alternative" element={<ScratchpayAlternative />} />
+            <Route path="/california-privacy-rights" element={<CaliforniaPrivacyRights />} />
+            <Route path="/do-not-sell-my-info" element={<DoNotSellMyInfo />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
