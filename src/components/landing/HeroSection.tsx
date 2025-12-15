@@ -15,6 +15,8 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
           src={heroImage}
           alt="Veterinarian comforting a dog in a modern clinic"
           className="w-full h-full object-cover opacity-20"
+          fetchPriority="high"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/80" />
       </div>
@@ -78,6 +80,8 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
                 src={heroImage}
                 alt="Veterinarian providing compassionate care to a pet"
                 className="w-full h-auto object-cover"
+                loading="lazy"
+                decoding="async"
               />
               {/* Overlay Card */}
               <div className="absolute bottom-6 left-6 right-6 bg-card/95 backdrop-blur-sm rounded-xl p-6 shadow-card">
