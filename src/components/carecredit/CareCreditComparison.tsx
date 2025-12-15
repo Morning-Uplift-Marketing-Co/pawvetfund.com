@@ -58,7 +58,7 @@ const CareCreditComparison = ({ onOpenForm }: CareCreditComparisonProps) => {
               Paw Vet Fund vs. CareCredit®
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              See why thousands of pet owners choose personal loans over medical credit cards.
+              See why thousands of pet owners choose Paw Vet Fund over medical credit cards.
             </p>
           </div>
 

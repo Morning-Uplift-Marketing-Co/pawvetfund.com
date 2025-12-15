@@ -15,7 +15,7 @@ const CareCreditDisclaimer = () => {
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Paw Vet Fund is an <strong>independent lead generation service</strong> and is{" "}
                 <strong>NOT affiliated with, endorsed by, or connected to CareCredit® or Synchrony Bank</strong> in 
-                any way. CareCredit® is a registered trademark of Synchrony Bank. We provide personal loan 
+                any way. CareCredit® is a registered trademark of Synchrony Bank. We provide financing 
                 alternatives through our network of third-party lenders. The comparison information on this 
                 page is for educational purposes only.
               </p>

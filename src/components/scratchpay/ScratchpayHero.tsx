@@ -24,7 +24,7 @@ const ScratchpayHero = ({ onOpenForm }: ScratchpayHeroProps) => {
 
           {/* Subheadline */}
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 text-balance">
-            Scratchpay is great, but not every vet takes it. Our personal loans deposit{" "}
+            Scratchpay is great, but not every vet takes it. Our financing deposits{" "}
             <strong className="text-foreground">CASH into your account</strong>, so you can pay{" "}
             <strong className="text-foreground">ANY veterinarian</strong> instantly.
           </p>

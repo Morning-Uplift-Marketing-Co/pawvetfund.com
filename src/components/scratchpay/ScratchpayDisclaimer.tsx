@@ -15,7 +15,7 @@ const ScratchpayDisclaimer = () => {
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Paw Vet Fund is an <strong>independent lead generation service</strong> and is{" "}
                 <strong>NOT affiliated with, endorsed by, or connected to Scratchpay Inc.</strong> in 
-                any way. Scratchpay is a trademark of Scratchpay Inc. We provide personal loan 
+                any way. Scratchpay is a trademark of Scratchpay Inc. We provide financing 
                 alternatives through our network of third-party lenders. The comparison information on this 
                 page is for educational purposes only.
               </p>

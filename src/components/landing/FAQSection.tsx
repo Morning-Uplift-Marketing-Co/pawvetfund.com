@@ -23,9 +23,9 @@ const faqs = [
       "Yes! We work with multiple lenders who specialize in all credit types. While we can't guarantee approval (no one legally can), many of our partner lenders have high approval odds even for those with credit challenges. Checking your rate is free and won't hurt your score.",
   },
   {
-    question: "Can I use the loan at any veterinarian?",
+    question: "Can I use the funds at any veterinarian?",
     answer:
-      "Absolutely. Unlike store credit cards like CareCredit that only work at participating vets, our personal loans give you cash in your bank account. You can use it at ANY vet clinic, emergency hospital, or even for pet medications and supplies.",
+      "Absolutely. Unlike store credit cards like CareCredit that only work at participating vets, our financing gives you cash in your bank account. You can use it at ANY vet clinic, emergency hospital, or even for pet medications and supplies.",
   },
   {
     question: "What can I use the loan for?",
