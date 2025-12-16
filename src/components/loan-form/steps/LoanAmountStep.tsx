@@ -11,7 +11,7 @@ interface LoanAmountStepProps {
   form: UseFormReturn<LoanFormData>;
 }
 
-const quickAmounts = [500, 1000, 2500, 5000, 10000];
+const quickAmounts = [500, 1000, 2000, 3000, 5000];
 
 const LoanAmountStep = ({ form }: LoanAmountStepProps) => {
   const amount = form.watch("loanAmount");
@@ -30,19 +30,19 @@ const LoanAmountStep = ({ form }: LoanAmountStepProps) => {
           </div>
         </div>
 
-        <Slider
-          value={[amount]}
-          onValueChange={(value) => form.setValue("loanAmount", value[0])}
-          min={500}
-          max={10000}
-          step={100}
-          className="py-4"
-        />
+          <Slider
+            value={[amount]}
+            onValueChange={(value) => form.setValue("loanAmount", value[0])}
+            min={500}
+            max={5000}
+            step={100}
+            className="py-4"
+          />
 
-        <div className="flex justify-between text-sm text-muted-foreground">
-          <span>$500</span>
-          <span>$10,000</span>
-        </div>
+          <div className="flex justify-between text-sm text-muted-foreground">
+            <span>$500</span>
+            <span>$5,000</span>
+          </div>
 
         {/* Quick Amount Buttons */}
         <div className="flex flex-wrap gap-2 pt-2">
