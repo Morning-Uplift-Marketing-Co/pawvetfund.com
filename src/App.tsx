@@ -9,7 +9,9 @@ import About from "./pages/About";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import CareCreditAlternative from "./pages/CareCreditAlternative";
+import CareCreditAlternativeLanding from "./pages/CareCreditAlternativeLanding";
 import ScratchpayAlternative from "./pages/ScratchpayAlternative";
+import EmergencyVetFunding from "./pages/EmergencyVetFunding";
 import CaliforniaPrivacyRights from "./pages/CaliforniaPrivacyRights";
 import DoNotSellMyInfo from "./pages/DoNotSellMyInfo";
 import NotFound from "./pages/NotFound";
@@ -29,7 +31,9 @@ const App = () => (
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/carecredit-alternative" element={<CareCreditAlternative />} />
+            <Route path="/carecredit-alternative-landing" element={<CareCreditAlternativeLanding />} />
             <Route path="/scratchpay-alternative" element={<ScratchpayAlternative />} />
+            <Route path="/emergency-vet-funding" element={<EmergencyVetFunding />} />
             <Route path="/california-privacy-rights" element={<CaliforniaPrivacyRights />} />
             <Route path="/do-not-sell-my-info" element={<DoNotSellMyInfo />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
