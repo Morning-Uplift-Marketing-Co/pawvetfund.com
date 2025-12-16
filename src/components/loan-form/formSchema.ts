@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const loanFormSchema = z.object({
-  loanAmount: z.number().min(500, "Minimum amount is $500").max(10000, "Maximum amount is $10,000"),
+  loanAmount: z.number().min(500, "Minimum amount is $500").max(5000, "Maximum amount is $5,000"),
   loanPurpose: z.string().min(1, "Please select a purpose"),
   creditRange: z.string().min(1, "Please select your credit range"),
   employmentStatus: z.string().min(1, "Please select employment status"),
