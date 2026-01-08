@@ -1,15 +1,20 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import Header from "@/components/landing/Header";
 import HeroSection from "@/components/landing/HeroSection";
 import TrustBar from "@/components/landing/TrustBar";
-import HowItWorks from "@/components/landing/HowItWorks";
-import ComparisonSection from "@/components/landing/ComparisonSection";
-import TestimonialSection from "@/components/landing/TestimonialSection";
-import FAQSection from "@/components/landing/FAQSection";
-import CTASection from "@/components/landing/CTASection";
-import Footer from "@/components/landing/Footer";
-import LoanFormDialog from "@/components/loan-form/LoanFormDialog";
 import { Helmet } from "react-helmet-async";
+
+// Lazy load below-the-fold components for better performance
+const HowItWorks = lazy(() => import("@/components/landing/HowItWorks"));
+const ComparisonSection = lazy(() => import("@/components/landing/ComparisonSection"));
+const TestimonialSection = lazy(() => import("@/components/landing/TestimonialSection"));
+const FAQSection = lazy(() => import("@/components/landing/FAQSection"));
+const CTASection = lazy(() => import("@/components/landing/CTASection"));
+const Footer = lazy(() => import("@/components/landing/Footer"));
+const LoanFormDialog = lazy(() => import("@/components/loan-form/LoanFormDialog"));
+
+// Simple loading fallback
+const SectionFallback = () => <div className="min-h-[200px]" />;
 
 const Index = () => {
   const [formOpen, setFormOpen] = useState(false);
@@ -37,16 +42,30 @@ const Index = () => {
         <main className="flex-1">
           <HeroSection onOpenForm={handleOpenForm} />
           <TrustBar />
-          <HowItWorks onOpenForm={handleOpenForm} />
-          <ComparisonSection onOpenForm={handleOpenForm} />
-          <TestimonialSection />
-          <FAQSection />
-          <CTASection onOpenForm={handleOpenForm} />
+          <Suspense fallback={<SectionFallback />}>
+            <HowItWorks onOpenForm={handleOpenForm} />
+          </Suspense>
+          <Suspense fallback={<SectionFallback />}>
+            <ComparisonSection onOpenForm={handleOpenForm} />
+          </Suspense>
+          <Suspense fallback={<SectionFallback />}>
+            <TestimonialSection />
+          </Suspense>
+          <Suspense fallback={<SectionFallback />}>
+            <FAQSection />
+          </Suspense>
+          <Suspense fallback={<SectionFallback />}>
+            <CTASection onOpenForm={handleOpenForm} />
+          </Suspense>
         </main>
-        <Footer />
+        <Suspense fallback={<SectionFallback />}>
+          <Footer />
+        </Suspense>
       </div>
 
-      <LoanFormDialog open={formOpen} onOpenChange={setFormOpen} />
+      <Suspense fallback={null}>
+        <LoanFormDialog open={formOpen} onOpenChange={setFormOpen} />
+      </Suspense>
     </>
   );
 };
