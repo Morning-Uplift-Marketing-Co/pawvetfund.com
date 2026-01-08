@@ -9,10 +9,16 @@
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://pawvetfund.com" />
     
-    <!-- Preload LCP image for performance - will be served as WebP when built -->
-    <link rel="preload" as="image" href="/src/assets/hero-vet.jpg" fetchpriority="high" />
-
+    <!-- Preconnect to Google Fonts for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
+    <!-- Preload fonts with display=swap for non-blocking rendering -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" /></noscript>
+
+
     
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://pawvetfund.com" />
