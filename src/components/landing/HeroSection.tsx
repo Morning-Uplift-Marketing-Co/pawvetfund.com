@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Shield, Clock, CheckCircle } from "lucide-react";
 
-// Optimized responsive images with WebP and fallback
-import heroImageWebp from "@/assets/hero-vet.jpg?w=640;960;1280;1920&format=webp&as=srcset";
-import heroImageJpg from "@/assets/hero-vet.jpg?w=640;960;1280;1920&format=jpg&as=srcset";
-import heroImageFallback from "@/assets/hero-vet.jpg?w=1280";
+// Optimized responsive images with AVIF, WebP and fallback
+import heroImageAvif from "@/assets/hero-vet.jpg?w=640;960;1280&format=avif&as=srcset";
+import heroImageWebp from "@/assets/hero-vet.jpg?w=640;960;1280&format=webp&as=srcset";
+import heroImageJpg from "@/assets/hero-vet.jpg?w=640;960;1280&format=jpg&as=srcset";
+import heroImageFallback from "@/assets/hero-vet.jpg?w=960";
 
 interface HeroSectionProps {
   onOpenForm: () => void;
@@ -13,9 +14,14 @@ interface HeroSectionProps {
 const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
   return (
     <section className="relative min-h-[90vh] flex items-center hero-gradient overflow-hidden">
-      {/* Background Image - Optimized with WebP and responsive srcset */}
+      {/* Background Image - Optimized with AVIF, WebP and responsive srcset */}
       <div className="absolute inset-0 z-0">
         <picture>
+          <source 
+            srcSet={heroImageAvif} 
+            type="image/avif" 
+            sizes="100vw"
+          />
           <source 
             srcSet={heroImageWebp} 
             type="image/webp" 
@@ -32,8 +38,8 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
             className="w-full h-full object-cover opacity-20"
             fetchPriority="high"
             decoding="async"
-            width={1280}
-            height={853}
+            width={960}
+            height={640}
           />
         </picture>
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/80" />
@@ -96,6 +102,11 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <picture>
                 <source 
+                  srcSet={heroImageAvif} 
+                  type="image/avif" 
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <source 
                   srcSet={heroImageWebp} 
                   type="image/webp" 
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -111,8 +122,8 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
                   className="w-full h-auto object-cover"
                   loading="lazy"
                   decoding="async"
-                  width={1280}
-                  height={853}
+                  width={960}
+                  height={640}
                 />
               </picture>
               {/* Overlay Card */}
