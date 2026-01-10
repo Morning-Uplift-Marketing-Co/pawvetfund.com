@@ -98,7 +98,7 @@ const LoanApplicationForm = ({ onClose, prefillZipCode }: LoanApplicationFormPro
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full max-w-lg mx-auto">
       <StepIndicator 
         currentStep={currentStep} 
         totalSteps={3} 
