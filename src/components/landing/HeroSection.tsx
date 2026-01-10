@@ -91,11 +91,7 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="hero" size="xl" className="group" onClick={onOpenForm}>
-                Check Your Rate Now
-                <CheckCircle className="w-5 h-5 transition-transform group-hover:scale-110" />
-              </Button>
+            <div className="flex flex-col gap-4">
               <div className="flex items-center gap-2">
                 <div className="relative">
                   <Input
@@ -112,7 +108,7 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
                   )}
                 </div>
                 <Button 
-                  variant="outline" 
+                  variant="hero" 
                   size="xl" 
                   onClick={handleZipSubmit}
                   className="group"
@@ -121,6 +117,10 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
                   <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                 </Button>
               </div>
+              <Button variant="outline" size="lg" className="group w-fit" onClick={onOpenForm}>
+                Check Your Rate Now
+                <CheckCircle className="w-5 h-5 transition-transform group-hover:scale-110" />
+              </Button>
             </div>
 
             {/* Quick Benefits */}
