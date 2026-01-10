@@ -10,9 +10,10 @@ import { Shield } from "lucide-react";
 interface LoanFormDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  prefillZipCode?: string;
 }
 
-const LoanFormDialog = ({ open, onOpenChange }: LoanFormDialogProps) => {
+const LoanFormDialog = ({ open, onOpenChange, prefillZipCode }: LoanFormDialogProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-xl max-h-[90vh] overflow-y-auto">
@@ -27,7 +28,7 @@ const LoanFormDialog = ({ open, onOpenChange }: LoanFormDialogProps) => {
         </DialogHeader>
         
         <div className="py-4">
-          <LoanApplicationForm onClose={() => onOpenChange(false)} />
+          <LoanApplicationForm onClose={() => onOpenChange(false)} prefillZipCode={prefillZipCode} />
         </div>
       </DialogContent>
     </Dialog>

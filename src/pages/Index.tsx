@@ -18,8 +18,12 @@ const SectionFallback = () => <div className="min-h-[200px]" />;
 
 const Index = () => {
   const [formOpen, setFormOpen] = useState(false);
+  const [prefillZipCode, setPrefillZipCode] = useState<string | undefined>();
 
-  const handleOpenForm = () => setFormOpen(true);
+  const handleOpenForm = (zipCode?: string) => {
+    setPrefillZipCode(zipCode);
+    setFormOpen(true);
+  };
 
   return (
     <>
@@ -64,7 +68,7 @@ const Index = () => {
       </div>
 
       <Suspense fallback={null}>
-        <LoanFormDialog open={formOpen} onOpenChange={setFormOpen} />
+        <LoanFormDialog open={formOpen} onOpenChange={setFormOpen} prefillZipCode={prefillZipCode} />
       </Suspense>
     </>
   );

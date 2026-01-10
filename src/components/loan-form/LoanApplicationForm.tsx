@@ -13,14 +13,22 @@ import { useToast } from "@/hooks/use-toast";
 
 const stepLabels = ["Amount", "Credit", "Contact", "Review"];
 
-const LoanApplicationForm = ({ onClose }: { onClose?: () => void }) => {
+interface LoanApplicationFormProps {
+  onClose?: () => void;
+  prefillZipCode?: string;
+}
+
+const LoanApplicationForm = ({ onClose, prefillZipCode }: LoanApplicationFormProps) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   const form = useForm<LoanFormData>({
     resolver: zodResolver(loanFormSchema),
-    defaultValues: defaultFormValues,
+    defaultValues: {
+      ...defaultFormValues,
+      zipCode: prefillZipCode || "",
+    },
     mode: "onChange",
   });
 
