@@ -1,11 +1,9 @@
 import { UseFormReturn } from "react-hook-form";
-import { LoanFormData, loanPurposes } from "../formSchema";
+import { LoanFormData } from "../formSchema";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { DollarSign } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 interface LoanAmountStepProps {
   form: UseFormReturn<LoanFormData>;
@@ -15,7 +13,6 @@ const quickAmounts = [500, 1000, 2000, 3000, 5000];
 
 const LoanAmountStep = ({ form }: LoanAmountStepProps) => {
   const amount = form.watch("loanAmount");
-  const purpose = form.watch("loanPurpose");
 
   return (
     <div className="space-y-8">
@@ -61,44 +58,6 @@ const LoanAmountStep = ({ form }: LoanAmountStepProps) => {
         </div>
       </div>
 
-      {/* Loan Purpose */}
-      <div className="space-y-4">
-        <Label className="text-base font-medium">What's this loan for?</Label>
-        
-        <RadioGroup
-          value={purpose}
-          onValueChange={(value) => form.setValue("loanPurpose", value)}
-          className="grid gap-3"
-        >
-          {loanPurposes.map((option) => (
-            <div key={option.value}>
-              <RadioGroupItem
-                value={option.value}
-                id={option.value}
-                className="peer sr-only"
-              />
-              <Label
-                htmlFor={option.value}
-                className={cn(
-                  "flex items-center justify-between p-4 rounded-lg border-2 cursor-pointer transition-all",
-                  "hover:border-primary/50 hover:bg-primary/5",
-                  purpose === option.value
-                    ? "border-primary bg-primary/10"
-                    : "border-border"
-                )}
-              >
-                <span className="font-medium">{option.label}</span>
-              </Label>
-            </div>
-          ))}
-        </RadioGroup>
-        
-        {form.formState.errors.loanPurpose && (
-          <p className="text-sm text-destructive">
-            {form.formState.errors.loanPurpose.message}
-          </p>
-        )}
-      </div>
     </div>
   );
 };
