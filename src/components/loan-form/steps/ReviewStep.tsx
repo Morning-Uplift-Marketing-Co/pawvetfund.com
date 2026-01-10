@@ -1,5 +1,5 @@
 import { UseFormReturn } from "react-hook-form";
-import { LoanFormData, loanPurposes, creditRanges, employmentStatuses } from "../formSchema";
+import { LoanFormData, creditRanges, employmentStatuses } from "../formSchema";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
@@ -13,7 +13,6 @@ interface ReviewStepProps {
 const ReviewStep = ({ form, onEditStep }: ReviewStepProps) => {
   const values = form.watch();
   
-  const purposeLabel = loanPurposes.find(p => p.value === values.loanPurpose)?.label || "";
   const creditLabel = creditRanges.find(c => c.value === values.creditRange);
   const employmentLabel = employmentStatuses.find(e => e.value === values.employmentStatus)?.label || "";
 
@@ -53,11 +52,7 @@ const ReviewStep = ({ form, onEditStep }: ReviewStepProps) => {
           <div className="space-y-1 text-sm">
             <div className="flex justify-between">
               <span className="text-muted-foreground">Amount:</span>
-              <span className="font-medium">${values.loanAmount.toLocaleString()}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Purpose:</span>
-              <span className="font-medium">{purposeLabel}</span>
+              <span className="font-medium">${values.loanAmount?.toLocaleString()}</span>
             </div>
           </div>
         </div>

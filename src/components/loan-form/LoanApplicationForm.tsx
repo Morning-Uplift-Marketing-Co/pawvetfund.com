@@ -37,7 +37,7 @@ const LoanApplicationForm = ({ onClose, prefillZipCode }: LoanApplicationFormPro
     
     switch (currentStep) {
       case 1:
-        fieldsToValidate = ["loanAmount", "loanPurpose"];
+        fieldsToValidate = ["loanAmount"];
         break;
       case 2:
         fieldsToValidate = ["creditRange", "employmentStatus"];
