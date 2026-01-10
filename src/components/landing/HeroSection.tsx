@@ -66,76 +66,83 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/80" />
       </div>
 
-      <div className="container relative z-10 py-16 lg:py-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="container relative z-10 py-12 px-4 sm:px-6 lg:py-24">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Content */}
-          <div className="space-y-8 animate-fade-up">
+          <div className="space-y-6 md:space-y-8 animate-fade-up text-center lg:text-left">
             {/* Trust Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
-              <Shield className="w-4 h-4" />
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-primary/10 text-primary text-xs sm:text-sm font-medium">
+              <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
               <span>Soft Credit Check — No Impact to Your Score</span>
             </div>
 
             {/* Headline */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-balance">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-balance">
               Your Pet's Health{" "}
               <span className="text-primary">Can't Wait.</span>{" "}
               <span className="text-accent">Neither Should You.</span>
             </h1>
 
             {/* Subheadline */}
-            <p className="text-lg md:text-xl text-muted-foreground max-w-xl text-balance">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0 text-balance">
               Get funds as fast as <strong className="text-foreground">24 hours</strong> to cover 
               unexpected vet bills from $500 to $10,000. All credit types considered. 
               Use the cash at <strong className="text-foreground">any veterinary clinic</strong> you choose.
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center gap-2">
-                <div className="relative">
+            <div className="flex flex-col gap-4 items-center lg:items-start">
+              {/* ZIP Code Input Group */}
+              <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+                <div className="relative w-full sm:w-auto">
                   <Input
                     type="text"
                     inputMode="numeric"
-                    placeholder="Enter ZIP Code"
+                    placeholder="ZIP Code"
                     value={zipCode}
                     onChange={handleZipChange}
-                    className="h-14 w-40 text-center text-lg font-medium border-2 border-border focus:border-primary rounded-xl"
+                    onKeyDown={(e) => e.key === 'Enter' && handleZipSubmit()}
+                    className="h-12 sm:h-14 w-full sm:w-36 text-center text-base sm:text-lg font-medium border-2 border-border focus:border-primary rounded-xl bg-background"
                     maxLength={5}
                   />
                   {zipError && (
-                    <p className="absolute -bottom-6 left-0 text-xs text-destructive whitespace-nowrap">{zipError}</p>
+                    <p className="absolute -bottom-5 left-0 right-0 text-xs text-destructive text-center sm:text-left sm:whitespace-nowrap">{zipError}</p>
                   )}
                 </div>
                 <Button 
                   variant="hero" 
-                  size="xl" 
+                  size="lg"
                   onClick={handleZipSubmit}
-                  className="group"
+                  className="group w-full sm:w-auto h-12 sm:h-14 px-6 sm:px-8"
                 >
-                  Go
+                  Check My Rate
                   <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                 </Button>
               </div>
-              <Button variant="outline" size="lg" className="group w-fit" onClick={onOpenForm}>
-                Check Your Rate Now
-                <CheckCircle className="w-5 h-5 transition-transform group-hover:scale-110" />
-              </Button>
+              
+              {/* Secondary CTA */}
+              <button 
+                onClick={onOpenForm}
+                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group"
+              >
+                <CheckCircle className="w-4 h-4" />
+                <span className="underline underline-offset-2">Skip ZIP — Check Your Rate Now</span>
+              </button>
             </div>
 
             {/* Quick Benefits */}
-            <div className="flex flex-wrap gap-6 pt-4">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Clock className="w-4 h-4 text-primary" />
+            <div className="flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-6 pt-2 sm:pt-4">
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+                <Clock className="w-4 h-4 text-primary flex-shrink-0" />
                 <span>Funds in 24 Hours</span>
               </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <CheckCircle className="w-4 h-4 text-trust" />
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+                <CheckCircle className="w-4 h-4 text-trust flex-shrink-0" />
                 <span>High Approval Odds</span>
               </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Shield className="w-4 h-4 text-primary" />
-                <span>256-bit SSL Encrypted</span>
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+                <Shield className="w-4 h-4 text-primary flex-shrink-0" />
+                <span>SSL Encrypted</span>
               </div>
             </div>
           </div>
