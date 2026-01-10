@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Shield, Clock, CheckCircle, ArrowRight } from "lucide-react";
+import { Shield, Clock, CheckCircle, ArrowRight, MapPin, Loader2 } from "lucide-react";
 
 // Optimized responsive images with AVIF, WebP and fallback
 import heroImageAvif from "@/assets/hero-vet.jpg?w=640;960;1280&format=avif&as=srcset";
@@ -13,16 +13,65 @@ interface HeroSectionProps {
   onOpenForm: () => void;
 }
 
+interface ZipLookupResult {
+  city: string;
+  state: string;
+}
+
 const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
   const [zipCode, setZipCode] = useState("");
   const [zipError, setZipError] = useState("");
   const [isZipValid, setIsZipValid] = useState(false);
+  const [cityInfo, setCityInfo] = useState<ZipLookupResult | null>(null);
+  const [isLoadingCity, setIsLoadingCity] = useState(false);
+
+  // Lookup city when ZIP is 5 digits
+  useEffect(() => {
+    const lookupCity = async () => {
+      if (zipCode.length !== 5) {
+        setCityInfo(null);
+        return;
+      }
+
+      setIsLoadingCity(true);
+      try {
+        const response = await fetch(`https://api.zippopotam.us/us/${zipCode}`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data.places && data.places.length > 0) {
+            setCityInfo({
+              city: data.places[0]["place name"],
+              state: data.places[0]["state abbreviation"]
+            });
+            setIsZipValid(true);
+            setZipError("");
+          }
+        } else {
+          setCityInfo(null);
+          setIsZipValid(false);
+          setZipError("ZIP not found");
+        }
+      } catch {
+        // Fallback: just validate format
+        setIsZipValid(true);
+        setCityInfo(null);
+      } finally {
+        setIsLoadingCity(false);
+      }
+    };
+
+    lookupCity();
+  }, [zipCode]);
 
   const handleZipSubmit = () => {
     const zipRegex = /^\d{5}$/;
     if (!zipRegex.test(zipCode)) {
       setZipError("Enter valid 5-digit ZIP");
       setIsZipValid(false);
+      return;
+    }
+    if (!isZipValid && !cityInfo) {
+      setZipError("ZIP not found");
       return;
     }
     setZipError("");
@@ -33,9 +82,10 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
     const value = e.target.value.replace(/\D/g, "").slice(0, 5);
     setZipCode(value);
     if (zipError) setZipError("");
-    
-    // Check if ZIP is valid (5 digits)
-    setIsZipValid(value.length === 5);
+    if (value.length < 5) {
+      setIsZipValid(false);
+      setCityInfo(null);
+    }
   };
 
   return (
@@ -117,13 +167,25 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
                       }`}
                       maxLength={5}
                     />
-                    {/* Valid checkmark animation */}
-                    {isZipValid && (
+                    {/* Loading or Valid indicator */}
+                    {isLoadingCity && (
+                      <div className="absolute right-2 top-1/2 -translate-y-1/2">
+                        <Loader2 className="w-5 h-5 text-muted-foreground animate-spin" />
+                      </div>
+                    )}
+                    {isZipValid && !isLoadingCity && (
                       <div className="absolute right-2 top-1/2 -translate-y-1/2 animate-scale-in">
                         <CheckCircle className="w-5 h-5 text-trust" />
                       </div>
                     )}
                   </div>
+                  {/* City name display */}
+                  {cityInfo && (
+                    <div className="mt-1 flex items-center justify-center sm:justify-start gap-1 text-xs text-trust animate-fade-in">
+                      <MapPin className="w-3 h-3" />
+                      <span className="font-medium">{cityInfo.city}, {cityInfo.state}</span>
+                    </div>
+                  )}
                   {zipError && (
                     <p className="mt-1 text-xs text-destructive text-center sm:text-left animate-fade-in">{zipError}</p>
                   )}
