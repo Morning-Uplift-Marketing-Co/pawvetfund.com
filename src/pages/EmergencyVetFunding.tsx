@@ -1,16 +1,20 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/landing/Header";
-import Footer from "@/components/landing/Footer";
-import LoanFormDialog from "@/components/loan-form/LoanFormDialog";
 import EmergencyVetHero from "@/components/emergency-vet/EmergencyVetHero";
 import EmergencyVetTrustBar from "@/components/emergency-vet/EmergencyVetTrustBar";
-import EmergencyVetHowItWorks from "@/components/emergency-vet/EmergencyVetHowItWorks";
-import EmergencyVetComparison from "@/components/emergency-vet/EmergencyVetComparison";
-import EmergencyVetBenefits from "@/components/emergency-vet/EmergencyVetBenefits";
-import EmergencyVetTestimonial from "@/components/emergency-vet/EmergencyVetTestimonial";
-import EmergencyVetFAQ from "@/components/emergency-vet/EmergencyVetFAQ";
-import EmergencyVetCTA from "@/components/emergency-vet/EmergencyVetCTA";
+
+// Lazy load below-the-fold components
+const EmergencyVetHowItWorks = lazy(() => import("@/components/emergency-vet/EmergencyVetHowItWorks"));
+const EmergencyVetComparison = lazy(() => import("@/components/emergency-vet/EmergencyVetComparison"));
+const EmergencyVetBenefits = lazy(() => import("@/components/emergency-vet/EmergencyVetBenefits"));
+const EmergencyVetTestimonial = lazy(() => import("@/components/emergency-vet/EmergencyVetTestimonial"));
+const EmergencyVetFAQ = lazy(() => import("@/components/emergency-vet/EmergencyVetFAQ"));
+const EmergencyVetCTA = lazy(() => import("@/components/emergency-vet/EmergencyVetCTA"));
+const Footer = lazy(() => import("@/components/landing/Footer"));
+const LoanFormDialog = lazy(() => import("@/components/loan-form/LoanFormDialog"));
+
+const SectionFallback = () => <div className="min-h-[200px]" />;
 
 const EmergencyVetFunding = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -34,17 +38,33 @@ const EmergencyVetFunding = () => {
         <main>
           <EmergencyVetHero onOpenForm={() => setIsFormOpen(true)} />
           <EmergencyVetTrustBar />
-          <EmergencyVetHowItWorks />
-          <EmergencyVetComparison onOpenForm={() => setIsFormOpen(true)} />
-          <EmergencyVetBenefits />
-          <EmergencyVetTestimonial />
-          <EmergencyVetFAQ />
-          <EmergencyVetCTA onOpenForm={() => setIsFormOpen(true)} />
+          <Suspense fallback={<SectionFallback />}>
+            <EmergencyVetHowItWorks />
+          </Suspense>
+          <Suspense fallback={<SectionFallback />}>
+            <EmergencyVetComparison onOpenForm={() => setIsFormOpen(true)} />
+          </Suspense>
+          <Suspense fallback={<SectionFallback />}>
+            <EmergencyVetBenefits />
+          </Suspense>
+          <Suspense fallback={<SectionFallback />}>
+            <EmergencyVetTestimonial />
+          </Suspense>
+          <Suspense fallback={<SectionFallback />}>
+            <EmergencyVetFAQ />
+          </Suspense>
+          <Suspense fallback={<SectionFallback />}>
+            <EmergencyVetCTA onOpenForm={() => setIsFormOpen(true)} />
+          </Suspense>
         </main>
-        <Footer />
+        <Suspense fallback={<SectionFallback />}>
+          <Footer />
+        </Suspense>
       </div>
 
-      <LoanFormDialog open={isFormOpen} onOpenChange={setIsFormOpen} />
+      <Suspense fallback={null}>
+        <LoanFormDialog open={isFormOpen} onOpenChange={setIsFormOpen} />
+      </Suspense>
     </>
   );
 };
