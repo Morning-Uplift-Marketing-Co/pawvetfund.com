@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/landing/Header";
 import EmergencyVetHero from "@/components/emergency-vet/EmergencyVetHero";
@@ -12,12 +12,13 @@ const EmergencyVetTestimonial = lazy(() => import("@/components/emergency-vet/Em
 const EmergencyVetFAQ = lazy(() => import("@/components/emergency-vet/EmergencyVetFAQ"));
 const EmergencyVetCTA = lazy(() => import("@/components/emergency-vet/EmergencyVetCTA"));
 const Footer = lazy(() => import("@/components/landing/Footer"));
-const LoanFormDialog = lazy(() => import("@/components/loan-form/LoanFormDialog"));
 
 const SectionFallback = () => <div className="min-h-[200px]" />;
 
 const EmergencyVetFunding = () => {
-  const [isFormOpen, setIsFormOpen] = useState(false);
+  const handleOpenForm = () => {
+    window.location.href = "https://trk.pawvetfund.com/click";
+  };
 
   return (
     <>
@@ -34,15 +35,15 @@ const EmergencyVetFunding = () => {
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        <Header onOpenForm={() => setIsFormOpen(true)} />
+        <Header onOpenForm={handleOpenForm} />
         <main>
-          <EmergencyVetHero onOpenForm={() => setIsFormOpen(true)} />
+          <EmergencyVetHero onOpenForm={handleOpenForm} />
           <EmergencyVetTrustBar />
           <Suspense fallback={<SectionFallback />}>
             <EmergencyVetHowItWorks />
           </Suspense>
           <Suspense fallback={<SectionFallback />}>
-            <EmergencyVetComparison onOpenForm={() => setIsFormOpen(true)} />
+            <EmergencyVetComparison onOpenForm={handleOpenForm} />
           </Suspense>
           <Suspense fallback={<SectionFallback />}>
             <EmergencyVetBenefits />
@@ -54,17 +55,11 @@ const EmergencyVetFunding = () => {
             <EmergencyVetFAQ />
           </Suspense>
           <Suspense fallback={<SectionFallback />}>
-            <EmergencyVetCTA onOpenForm={() => setIsFormOpen(true)} />
+            <EmergencyVetCTA onOpenForm={handleOpenForm} />
           </Suspense>
         </main>
-        <Suspense fallback={<SectionFallback />}>
-          <Footer />
-        </Suspense>
+        <Suspense fallback={<SectionFallback />}><Footer /></Suspense>
       </div>
-
-      <Suspense fallback={null}>
-        <LoanFormDialog open={isFormOpen} onOpenChange={setIsFormOpen} />
-      </Suspense>
     </>
   );
 };

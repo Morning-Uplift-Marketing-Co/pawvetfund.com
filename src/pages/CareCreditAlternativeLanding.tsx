@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/landing/Header";
 import CareCreditAltHero from "@/components/carecredit-alt/CareCreditAltHero";
@@ -11,12 +11,13 @@ const CareCreditAltTestimonial = lazy(() => import("@/components/carecredit-alt/
 const CareCreditAltCTA = lazy(() => import("@/components/carecredit-alt/CareCreditAltCTA"));
 const CareCreditAltDisclaimer = lazy(() => import("@/components/carecredit-alt/CareCreditAltDisclaimer"));
 const Footer = lazy(() => import("@/components/landing/Footer"));
-const LoanFormDialog = lazy(() => import("@/components/loan-form/LoanFormDialog"));
 
 const SectionFallback = () => <div className="min-h-[200px]" />;
 
 const CareCreditAlternativeLanding = () => {
-  const [isFormOpen, setIsFormOpen] = useState(false);
+  const handleOpenForm = () => {
+    window.location.href = "https://trk.pawvetfund.com/click";
+  };
 
   return (
     <>
@@ -27,34 +28,28 @@ const CareCreditAlternativeLanding = () => {
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        <Header onOpenForm={() => setIsFormOpen(true)} />
+        <Header onOpenForm={handleOpenForm} />
         <main>
-          <CareCreditAltHero onOpenForm={() => setIsFormOpen(true)} />
+          <CareCreditAltHero onOpenForm={handleOpenForm} />
           <CareCreditAltTrustBar />
           <Suspense fallback={<SectionFallback />}>
             <CareCreditAltTrap />
           </Suspense>
           <Suspense fallback={<SectionFallback />}>
-            <CareCreditAltTable onOpenForm={() => setIsFormOpen(true)} />
+            <CareCreditAltTable onOpenForm={handleOpenForm} />
           </Suspense>
           <Suspense fallback={<SectionFallback />}>
             <CareCreditAltTestimonial />
           </Suspense>
           <Suspense fallback={<SectionFallback />}>
-            <CareCreditAltCTA onOpenForm={() => setIsFormOpen(true)} />
+            <CareCreditAltCTA onOpenForm={handleOpenForm} />
           </Suspense>
           <Suspense fallback={<SectionFallback />}>
             <CareCreditAltDisclaimer />
           </Suspense>
         </main>
-        <Suspense fallback={<SectionFallback />}>
-          <Footer />
-        </Suspense>
+        <Suspense fallback={<SectionFallback />}><Footer /></Suspense>
       </div>
-
-      <Suspense fallback={null}>
-        <LoanFormDialog open={isFormOpen} onOpenChange={setIsFormOpen} />
-      </Suspense>
     </>
   );
 };

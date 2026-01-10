@@ -1,11 +1,9 @@
-import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Heart, Eye, Users, Shield, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Header from "@/components/landing/Header";
 import Footer from "@/components/landing/Footer";
-import LoanFormDialog from "@/components/loan-form/LoanFormDialog";
 
 const whyDifferent = [
   {
@@ -26,8 +24,9 @@ const whyDifferent = [
 ];
 
 const About = () => {
-  const [formOpen, setFormOpen] = useState(false);
-  const handleOpenForm = () => setFormOpen(true);
+  const handleOpenForm = () => {
+    window.location.href = "https://trk.pawvetfund.com/click";
+  };
 
   return (
     <>
@@ -162,8 +161,6 @@ const About = () => {
 
         <Footer />
       </div>
-
-      <LoanFormDialog open={formOpen} onOpenChange={setFormOpen} />
     </>
   );
 };
