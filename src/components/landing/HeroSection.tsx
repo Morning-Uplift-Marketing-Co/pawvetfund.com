@@ -16,11 +16,13 @@ interface HeroSectionProps {
 const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
   const [zipCode, setZipCode] = useState("");
   const [zipError, setZipError] = useState("");
+  const [isZipValid, setIsZipValid] = useState(false);
 
   const handleZipSubmit = () => {
     const zipRegex = /^\d{5}$/;
     if (!zipRegex.test(zipCode)) {
-      setZipError("Please enter a valid 5-digit ZIP code");
+      setZipError("Enter valid 5-digit ZIP");
+      setIsZipValid(false);
       return;
     }
     setZipError("");
@@ -31,6 +33,9 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
     const value = e.target.value.replace(/\D/g, "").slice(0, 5);
     setZipCode(value);
     if (zipError) setZipError("");
+    
+    // Check if ZIP is valid (5 digits)
+    setIsZipValid(value.length === 5);
   };
 
   return (
@@ -95,28 +100,44 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
               {/* ZIP Code Input Group */}
               <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
                 <div className="relative w-full sm:w-auto">
-                  <Input
-                    type="text"
-                    inputMode="numeric"
-                    placeholder="ZIP Code"
-                    value={zipCode}
-                    onChange={handleZipChange}
-                    onKeyDown={(e) => e.key === 'Enter' && handleZipSubmit()}
-                    className="h-12 sm:h-14 w-full sm:w-36 text-center text-base sm:text-lg font-medium border-2 border-border focus:border-primary rounded-xl bg-background"
-                    maxLength={5}
-                  />
+                  <div className="relative">
+                    <Input
+                      type="text"
+                      inputMode="numeric"
+                      placeholder="ZIP Code"
+                      value={zipCode}
+                      onChange={handleZipChange}
+                      onKeyDown={(e) => e.key === 'Enter' && handleZipSubmit()}
+                      className={`h-12 sm:h-14 w-full sm:w-36 text-center text-base sm:text-lg font-medium border-2 rounded-xl bg-background transition-all duration-300 ${
+                        isZipValid 
+                          ? 'border-trust ring-2 ring-trust/20' 
+                          : zipError 
+                            ? 'border-destructive' 
+                            : 'border-border focus:border-primary'
+                      }`}
+                      maxLength={5}
+                    />
+                    {/* Valid checkmark animation */}
+                    {isZipValid && (
+                      <div className="absolute right-2 top-1/2 -translate-y-1/2 animate-scale-in">
+                        <CheckCircle className="w-5 h-5 text-trust" />
+                      </div>
+                    )}
+                  </div>
                   {zipError && (
-                    <p className="absolute -bottom-5 left-0 right-0 text-xs text-destructive text-center sm:text-left sm:whitespace-nowrap">{zipError}</p>
+                    <p className="mt-1 text-xs text-destructive text-center sm:text-left animate-fade-in">{zipError}</p>
                   )}
                 </div>
                 <Button 
                   variant="hero" 
                   size="lg"
                   onClick={handleZipSubmit}
-                  className="group w-full sm:w-auto h-12 sm:h-14 px-6 sm:px-8"
+                  className={`group w-full sm:w-auto h-12 sm:h-14 px-6 sm:px-8 transition-all duration-300 ${
+                    isZipValid ? 'scale-105 shadow-lg' : ''
+                  }`}
                 >
                   Check My Rate
-                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className={`w-5 h-5 transition-transform ${isZipValid ? 'translate-x-1' : 'group-hover:translate-x-1'}`} />
                 </Button>
               </div>
               
