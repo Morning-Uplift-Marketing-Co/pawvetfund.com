@@ -267,7 +267,7 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
                   src={heroImageFallback}
                   alt="Veterinarian providing compassionate care to a pet"
                   className="w-full h-auto object-cover"
-                  loading="lazy"
+                  fetchPriority="high"
                   decoding="async"
                   width={960}
                   height={640}
