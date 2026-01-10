@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Shield, Clock, CheckCircle } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Shield, Clock, CheckCircle, ArrowRight } from "lucide-react";
 
 // Optimized responsive images with AVIF, WebP and fallback
 import heroImageAvif from "@/assets/hero-vet.jpg?w=640;960;1280&format=avif&as=srcset";
@@ -12,6 +14,25 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
+  const [zipCode, setZipCode] = useState("");
+  const [zipError, setZipError] = useState("");
+
+  const handleZipSubmit = () => {
+    const zipRegex = /^\d{5}$/;
+    if (!zipRegex.test(zipCode)) {
+      setZipError("Please enter a valid 5-digit ZIP code");
+      return;
+    }
+    setZipError("");
+    onOpenForm();
+  };
+
+  const handleZipChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\D/g, "").slice(0, 5);
+    setZipCode(value);
+    if (zipError) setZipError("");
+  };
+
   return (
     <section className="relative min-h-[90vh] flex items-center hero-gradient overflow-hidden">
       {/* Background Image - Optimized with AVIF, WebP and responsive srcset */}
@@ -75,9 +96,31 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
                 Check Your Rate Now
                 <CheckCircle className="w-5 h-5 transition-transform group-hover:scale-110" />
               </Button>
-              <Button variant="outline" size="xl" onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}>
-                See How It Works
-              </Button>
+              <div className="flex items-center gap-2">
+                <div className="relative">
+                  <Input
+                    type="text"
+                    inputMode="numeric"
+                    placeholder="Enter ZIP Code"
+                    value={zipCode}
+                    onChange={handleZipChange}
+                    className="h-14 w-40 text-center text-lg font-medium border-2 border-border focus:border-primary rounded-xl"
+                    maxLength={5}
+                  />
+                  {zipError && (
+                    <p className="absolute -bottom-6 left-0 text-xs text-destructive whitespace-nowrap">{zipError}</p>
+                  )}
+                </div>
+                <Button 
+                  variant="outline" 
+                  size="xl" 
+                  onClick={handleZipSubmit}
+                  className="group"
+                >
+                  Go
+                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </div>
             </div>
 
             {/* Quick Benefits */}
