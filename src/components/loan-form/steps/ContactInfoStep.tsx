@@ -23,82 +23,99 @@ const ContactInfoStep = ({ form }: ContactInfoStepProps) => {
     setValue("phone", formatted, { shouldValidate: true });
   };
 
-  const inputBaseClass = "h-14 pl-12 text-base bg-muted/30 border-0 rounded-2xl focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:bg-background transition-all placeholder:text-muted-foreground/60";
+  const inputBaseClass = cn(
+    "h-11 pl-10 text-sm bg-white border border-border rounded-lg",
+    "transition-all duration-200",
+    "placeholder:text-muted-foreground",
+    "focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+  );
+
+  const iconClass = "absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground";
 
   return (
     <div className="space-y-4">
       {/* Name Row */}
       <div className="grid grid-cols-2 gap-3">
-        <div className="relative">
-          <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground/50" />
-          <Input
-            id="firstName"
-            placeholder="First name"
-            {...register("firstName")}
-            className={cn(inputBaseClass, errors.firstName && "ring-2 ring-destructive/50")}
-          />
+        <div className="space-y-1">
+          <div className="relative">
+            <User className={iconClass} />
+            <Input
+              id="firstName"
+              placeholder="First name"
+              {...register("firstName")}
+              className={cn(inputBaseClass, errors.firstName && "border-destructive focus:ring-destructive/30")}
+            />
+          </div>
           {errors.firstName && (
-            <p className="text-xs text-destructive mt-1.5 pl-1">{errors.firstName.message}</p>
+            <p className="text-xs text-destructive pl-1">{errors.firstName.message}</p>
           )}
         </div>
 
-        <div className="relative">
-          <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground/50" />
-          <Input
-            id="lastName"
-            placeholder="Last name"
-            {...register("lastName")}
-            className={cn(inputBaseClass, errors.lastName && "ring-2 ring-destructive/50")}
-          />
+        <div className="space-y-1">
+          <div className="relative">
+            <User className={iconClass} />
+            <Input
+              id="lastName"
+              placeholder="Last name"
+              {...register("lastName")}
+              className={cn(inputBaseClass, errors.lastName && "border-destructive focus:ring-destructive/30")}
+            />
+          </div>
           {errors.lastName && (
-            <p className="text-xs text-destructive mt-1.5 pl-1">{errors.lastName.message}</p>
+            <p className="text-xs text-destructive pl-1">{errors.lastName.message}</p>
           )}
         </div>
       </div>
 
       {/* Email */}
-      <div className="relative">
-        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground/50" />
-        <Input
-          id="email"
-          type="email"
-          placeholder="Email address"
-          {...register("email")}
-          className={cn(inputBaseClass, errors.email && "ring-2 ring-destructive/50")}
-        />
+      <div className="space-y-1">
+        <div className="relative">
+          <Mail className={iconClass} />
+          <Input
+            id="email"
+            type="email"
+            placeholder="Email address"
+            {...register("email")}
+            className={cn(inputBaseClass, errors.email && "border-destructive focus:ring-destructive/30")}
+          />
+        </div>
         {errors.email && (
-          <p className="text-xs text-destructive mt-1.5 pl-1">{errors.email.message}</p>
+          <p className="text-xs text-destructive pl-1">{errors.email.message}</p>
         )}
       </div>
 
       {/* Phone */}
-      <div className="relative">
-        <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground/50" />
-        <Input
-          id="phone"
-          type="tel"
-          placeholder="Phone number"
-          value={watch("phone")}
-          onChange={handlePhoneChange}
-          className={cn(inputBaseClass, errors.phone && "ring-2 ring-destructive/50")}
-        />
+      <div className="space-y-1">
+        <div className="relative">
+          <Phone className={iconClass} />
+          <Input
+            id="phone"
+            type="tel"
+            placeholder="Phone number"
+            value={watch("phone")}
+            onChange={handlePhoneChange}
+            className={cn(inputBaseClass, errors.phone && "border-destructive focus:ring-destructive/30")}
+          />
+        </div>
         {errors.phone && (
-          <p className="text-xs text-destructive mt-1.5 pl-1">{errors.phone.message}</p>
+          <p className="text-xs text-destructive pl-1">{errors.phone.message}</p>
         )}
       </div>
 
       {/* ZIP Code */}
-      <div className="relative w-40">
-        <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground/50" />
-        <Input
-          id="zipCode"
-          placeholder="ZIP code"
-          maxLength={5}
-          {...register("zipCode")}
-          className={cn(inputBaseClass, errors.zipCode && "ring-2 ring-destructive/50")}
-        />
+      <div className="space-y-1 w-36">
+        <div className="relative">
+          <MapPin className={iconClass} />
+          <Input
+            id="zipCode"
+            placeholder="ZIP code"
+            maxLength={5}
+            {...register("zipCode")}
+            className={cn(inputBaseClass, errors.zipCode && "border-destructive focus:ring-destructive/30")}
+          />
+        </div>
         {errors.zipCode && (
-          <p className="text-xs text-destructive mt-1.5 pl-1">{errors.zipCode.message}</p>
+          <p className="text-xs text-destructive pl-1">{errors.zipCode.message}</p>
         )}
       </div>
     </div>

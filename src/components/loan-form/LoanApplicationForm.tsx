@@ -98,7 +98,7 @@ const LoanApplicationForm = ({ onClose, prefillZipCode }: LoanApplicationFormPro
   };
 
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div className="w-full">
       <StepIndicator 
         currentStep={currentStep} 
         totalSteps={3} 
@@ -106,21 +106,21 @@ const LoanApplicationForm = ({ onClose, prefillZipCode }: LoanApplicationFormPro
       />
 
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="min-h-[380px]">
+        <div className="min-h-[340px]">
           {renderStep()}
         </div>
 
         {/* Navigation */}
-        <div className="flex items-center gap-3 pt-6">
+        <div className="flex items-center gap-3 pt-4">
           {currentStep > 1 && (
             <Button
               type="button"
               variant="ghost"
               size="icon"
               onClick={handlePrev}
-              className="rounded-full w-12 h-12"
+              className="w-11 h-11 rounded-lg hover:bg-muted"
             >
-              <ArrowLeft className="w-5 h-5" />
+              <ArrowLeft className="w-5 h-5 text-muted-foreground" />
             </Button>
           )}
 
@@ -129,22 +129,22 @@ const LoanApplicationForm = ({ onClose, prefillZipCode }: LoanApplicationFormPro
               type="button"
               onClick={handleNext}
               className={cn(
-                "flex-1 h-14 rounded-2xl text-base font-semibold gap-2",
+                "flex-1 h-11 rounded-lg text-sm font-medium gap-2 bg-primary hover:bg-primary/90",
                 currentStep === 1 && "ml-0"
               )}
             >
               Continue
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-4 h-4" />
             </Button>
           ) : (
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="flex-1 h-14 rounded-2xl text-base font-semibold"
+              className="flex-1 h-11 rounded-lg text-sm font-medium bg-primary hover:bg-primary/90"
             >
               {isSubmitting ? (
                 <>
-                  <Loader2 className="w-5 h-5 animate-spin mr-2" />
+                  <Loader2 className="w-4 h-4 animate-spin mr-2" />
                   Checking rates...
                 </>
               ) : (
