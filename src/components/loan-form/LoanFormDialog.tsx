@@ -16,18 +16,18 @@ interface LoanFormDialogProps {
 const LoanFormDialog = ({ open, onOpenChange, prefillZipCode }: LoanFormDialogProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-xl max-h-[90vh] overflow-y-auto p-4">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-center">
+          <DialogTitle className="text-xl font-bold text-center">
             Check Your Rate in Minutes
           </DialogTitle>
-          <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground pt-1">
+          <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground pt-0.5">
             <Shield className="w-4 h-4 text-trust" />
             <span>No impact to your credit score</span>
           </div>
         </DialogHeader>
-        
-        <div className="py-4">
+
+        <div className="py-2">
           <LoanApplicationForm onClose={() => onOpenChange(false)} prefillZipCode={prefillZipCode} />
         </div>
       </DialogContent>

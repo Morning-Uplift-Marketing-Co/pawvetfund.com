@@ -15,14 +15,14 @@ const LoanAmountStep = ({ form }: LoanAmountStepProps) => {
   const amount = form.watch("loanAmount");
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-4">
       {/* Amount Slider */}
-      <div className="space-y-4">
-        <Label className="text-base font-medium">How much do you need?</Label>
-        
-        <div className="text-center py-6">
-          <div className="inline-flex items-center gap-1 text-5xl font-bold text-primary">
-            <DollarSign className="w-10 h-10" />
+      <div className="space-y-3">
+        <Label className="text-sm font-medium">How much do you need?</Label>
+
+        <div className="text-center py-3">
+          <div className="inline-flex items-center gap-1 text-3xl font-bold text-primary">
+            <DollarSign className="w-8 h-8" />
             <span>{amount.toLocaleString()}</span>
           </div>
         </div>
@@ -33,7 +33,7 @@ const LoanAmountStep = ({ form }: LoanAmountStepProps) => {
             min={500}
             max={5000}
             step={100}
-            className="py-4"
+            className="py-2"
           />
 
           <div className="flex justify-between text-sm text-muted-foreground">
@@ -42,7 +42,7 @@ const LoanAmountStep = ({ form }: LoanAmountStepProps) => {
           </div>
 
         {/* Quick Amount Buttons */}
-        <div className="flex flex-wrap gap-2 pt-2">
+        <div className="flex flex-wrap gap-1.5 pt-1">
           {quickAmounts.map((amt) => (
             <Button
               key={amt}

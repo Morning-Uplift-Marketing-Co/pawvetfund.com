@@ -38,10 +38,10 @@ const ContactInfoStep = ({ form }: ContactInfoStepProps) => {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div className="space-y-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {/* First Name */}
-        <div className="space-y-2">
+        <div className="space-y-1.5">
           <Label htmlFor="firstName">First Name</Label>
           <div className="relative">
             <Input
@@ -63,7 +63,7 @@ const ContactInfoStep = ({ form }: ContactInfoStepProps) => {
         </div>
 
         {/* Last Name */}
-        <div className="space-y-2">
+        <div className="space-y-1.5">
           <Label htmlFor="lastName">Last Name</Label>
           <div className="relative">
             <Input
@@ -86,7 +86,7 @@ const ContactInfoStep = ({ form }: ContactInfoStepProps) => {
       </div>
 
       {/* Email */}
-      <div className="space-y-2">
+      <div className="space-y-1.5">
         <Label htmlFor="email">Email Address</Label>
         <div className="relative">
           <Input
@@ -109,7 +109,7 @@ const ContactInfoStep = ({ form }: ContactInfoStepProps) => {
       </div>
 
       {/* Phone */}
-      <div className="space-y-2">
+      <div className="space-y-1.5">
         <Label htmlFor="phone">Phone Number</Label>
         <div className="relative">
           <Input
@@ -133,7 +133,7 @@ const ContactInfoStep = ({ form }: ContactInfoStepProps) => {
       </div>
 
       {/* ZIP Code */}
-      <div className="space-y-2">
+      <div className="space-y-1.5">
         <Label htmlFor="zipCode">ZIP Code</Label>
         <div className="relative">
           <Input

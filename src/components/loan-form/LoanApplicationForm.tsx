@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
 import { loanFormSchema, LoanFormData, defaultFormValues } from "./formSchema";
 import StepIndicator from "./StepIndicator";
 import LoanAmountStep from "./steps/LoanAmountStep";
@@ -21,6 +22,7 @@ const LoanApplicationForm = ({ onClose, prefillZipCode }: LoanApplicationFormPro
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const form = useForm<LoanFormData>({
     resolver: zodResolver(loanFormSchema),
@@ -69,19 +71,29 @@ const LoanApplicationForm = ({ onClose, prefillZipCode }: LoanApplicationFormPro
 
   const onSubmit = async (data: LoanFormData) => {
     setIsSubmitting(true);
-    
+
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
     console.log("Form submitted:", data);
-    
-    toast({
-      title: "Application Submitted!",
-      description: "We're matching you with lenders. Check your email for offers.",
+
+    // Create query parameters from form data (matching API Keep parameter names)
+    const params = new URLSearchParams({
+      requested_amount: data.loanAmount.toString(),
+      first_name: data.firstName,
+      last_name: data.lastName,
+      email: data.email,
+      home_phone: data.phone.replace(/\D/g, ''), // Remove formatting, keep only numbers
+      zip: data.zipCode,
     });
-    
-    setIsSubmitting(false);
+
+    // Close dialog first
     onClose?.();
+
+    // Redirect to apply page with data
+    navigate(`/apply?${params.toString()}`);
+
+    setIsSubmitting(false);
   };
 
   const renderStep = () => {
@@ -106,12 +118,12 @@ const LoanApplicationForm = ({ onClose, prefillZipCode }: LoanApplicationFormPro
       />
 
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="min-h-[400px]">
+        <div className="min-h-[280px]">
           {renderStep()}
         </div>
 
         {/* Navigation Buttons */}
-        <div className="flex justify-between pt-6 mt-6 border-t">
+        <div className="flex justify-between pt-4 mt-4 border-t">
           <Button
             type="button"
             variant="outline"

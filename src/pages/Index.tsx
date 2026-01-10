@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from "react";
+import { useState, lazy, Suspense, useCallback } from "react";
 import Header from "@/components/landing/Header";
 import HeroSection from "@/components/landing/HeroSection";
 import TrustBar from "@/components/landing/TrustBar";
@@ -20,10 +20,10 @@ const Index = () => {
   const [formOpen, setFormOpen] = useState(false);
   const [prefillZipCode, setPrefillZipCode] = useState<string | undefined>();
 
-  const handleOpenForm = (zipCode?: string) => {
+  const handleOpenForm = useCallback((zipCode?: string) => {
     setPrefillZipCode(zipCode);
     setFormOpen(true);
-  };
+  }, []);
 
   return (
     <>

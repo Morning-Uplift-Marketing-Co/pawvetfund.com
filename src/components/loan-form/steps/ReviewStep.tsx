@@ -25,12 +25,12 @@ const ReviewStep = ({ form, onEditStep }: ReviewStepProps) => {
   const maxMonthly = calculateMonthly(25.99).toFixed(0);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Summary Cards */}
-      <div className="space-y-4">
+      <div className="space-y-3">
         {/* Loan Details */}
-        <div className="p-4 rounded-lg border bg-card">
-          <div className="flex items-center justify-between mb-3">
+        <div className="p-3 rounded-lg border bg-card">
+          <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
               <DollarSign className="w-5 h-5 text-primary" />
               <span className="font-semibold">Loan Details</span>
@@ -39,7 +39,7 @@ const ReviewStep = ({ form, onEditStep }: ReviewStepProps) => {
               <Pencil className="w-4 h-4" />
             </Button>
           </div>
-          <div className="space-y-1 text-sm">
+          <div className="space-y-0.5 text-sm">
             <div className="flex justify-between">
               <span className="text-muted-foreground">Amount:</span>
               <span className="font-medium">${values.loanAmount?.toLocaleString()}</span>
@@ -48,8 +48,8 @@ const ReviewStep = ({ form, onEditStep }: ReviewStepProps) => {
         </div>
 
         {/* Contact Info */}
-        <div className="p-4 rounded-lg border bg-card">
-          <div className="flex items-center justify-between mb-3">
+        <div className="p-3 rounded-lg border bg-card">
+          <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
               <User className="w-5 h-5 text-primary" />
               <span className="font-semibold">Contact Information</span>
@@ -58,7 +58,7 @@ const ReviewStep = ({ form, onEditStep }: ReviewStepProps) => {
               <Pencil className="w-4 h-4" />
             </Button>
           </div>
-          <div className="space-y-1 text-sm">
+          <div className="space-y-0.5 text-sm">
             <div className="flex justify-between">
               <span className="text-muted-foreground">Name:</span>
               <span className="font-medium">{values.firstName} {values.lastName}</span>
@@ -79,17 +79,17 @@ const ReviewStep = ({ form, onEditStep }: ReviewStepProps) => {
         </div>
 
         {/* Estimated Payment */}
-        <div className="p-4 rounded-lg border-2 border-primary/20 bg-primary/5">
+        <div className="p-3 rounded-lg border-2 border-primary/20 bg-primary/5">
           <div className="text-center">
             <p className="text-sm text-muted-foreground mb-1">Estimated Monthly Payment</p>
-            <p className="text-2xl font-bold text-primary">${minMonthly} - ${maxMonthly}</p>
+            <p className="text-xl font-bold text-primary">${minMonthly} - ${maxMonthly}</p>
             <p className="text-xs text-muted-foreground mt-1">Based on 36-month term</p>
           </div>
         </div>
       </div>
 
       {/* Terms Agreement */}
-      <div className="space-y-4 pt-4 border-t">
+      <div className="space-y-3 pt-3 border-t">
         <div className="flex items-start gap-3">
           <Checkbox
             id="agreeToTerms"
@@ -108,7 +108,7 @@ const ReviewStep = ({ form, onEditStep }: ReviewStepProps) => {
           <p className="text-sm text-destructive">{form.formState.errors.agreeToTerms.message}</p>
         )}
 
-        <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/50 p-3 rounded-lg">
+        <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/50 p-2 rounded-lg">
           <Shield className="w-4 h-4 text-trust flex-shrink-0" />
           <span>Your information is protected with 256-bit SSL encryption</span>
         </div>

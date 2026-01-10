@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Shield, Clock, CheckCircle, ArrowRight, MapPin, Loader2 } from "lucide-react";
@@ -24,20 +24,17 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
   const [isZipValid, setIsZipValid] = useState(false);
   const [cityInfo, setCityInfo] = useState<ZipLookupResult | null>(null);
   const [isLoadingCity, setIsLoadingCity] = useState(false);
-  const [autoSubmitTimer, setAutoSubmitTimer] = useState<NodeJS.Timeout | null>(null);
+  const hasAutoSubmittedRef = useRef(false);
 
-  // Auto-submit after 1 second when ZIP is valid
+  // Auto-submit after 1 second when ZIP is valid (only once)
   useEffect(() => {
-    if (isZipValid && cityInfo && !isLoadingCity) {
+    if (isZipValid && cityInfo && !isLoadingCity && !hasAutoSubmittedRef.current) {
       const timer = setTimeout(() => {
+        hasAutoSubmittedRef.current = true;
         onOpenForm(zipCode);
       }, 1000);
-      setAutoSubmitTimer(timer);
       return () => clearTimeout(timer);
     }
-    return () => {
-      if (autoSubmitTimer) clearTimeout(autoSubmitTimer);
-    };
   }, [isZipValid, cityInfo, isLoadingCity, zipCode, onOpenForm]);
 
   // Lookup city when ZIP is 5 digits
@@ -79,9 +76,6 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
   }, [zipCode]);
 
   const handleZipSubmit = () => {
-    // Cancel auto-submit timer if user clicks manually
-    if (autoSubmitTimer) clearTimeout(autoSubmitTimer);
-    
     const zipRegex = /^\d{5}$/;
     if (!zipRegex.test(zipCode)) {
       setZipError("Enter valid 5-digit ZIP");
@@ -93,6 +87,7 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
       return;
     }
     setZipError("");
+    hasAutoSubmittedRef.current = true;
     onOpenForm(zipCode);
   };
 
@@ -103,6 +98,7 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
     if (value.length < 5) {
       setIsZipValid(false);
       setCityInfo(null);
+      hasAutoSubmittedRef.current = false; // Reset when ZIP changes
     }
   };
 
