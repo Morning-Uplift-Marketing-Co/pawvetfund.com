@@ -1,8 +1,6 @@
-import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/landing/Header";
 import Footer from "@/components/landing/Footer";
-import LoanFormDialog from "@/components/loan-form/LoanFormDialog";
 import ScratchpayHero from "@/components/scratchpay/ScratchpayHero";
 import CashIsKing from "@/components/scratchpay/CashIsKing";
 import ScratchpayComparison from "@/components/scratchpay/ScratchpayComparison";
@@ -10,7 +8,9 @@ import ScratchpayTestimonial from "@/components/scratchpay/ScratchpayTestimonial
 import ScratchpayDisclaimer from "@/components/scratchpay/ScratchpayDisclaimer";
 
 const ScratchpayAlternative = () => {
-  const [isFormOpen, setIsFormOpen] = useState(false);
+  const handleOpenForm = () => {
+    window.location.href = "https://trk.pawvetfund.com/click";
+  };
 
   return (
     <>
@@ -24,18 +24,16 @@ const ScratchpayAlternative = () => {
       </Helmet>
       
       <div className="min-h-screen bg-background">
-        <Header onOpenForm={() => setIsFormOpen(true)} />
+        <Header onOpenForm={handleOpenForm} />
         <main>
-          <ScratchpayHero onOpenForm={() => setIsFormOpen(true)} />
+          <ScratchpayHero onOpenForm={handleOpenForm} />
           <CashIsKing />
-          <ScratchpayComparison onOpenForm={() => setIsFormOpen(true)} />
+          <ScratchpayComparison onOpenForm={handleOpenForm} />
           <ScratchpayTestimonial />
           <ScratchpayDisclaimer />
         </main>
         <Footer />
       </div>
-
-      <LoanFormDialog open={isFormOpen} onOpenChange={setIsFormOpen} />
     </>
   );
 };

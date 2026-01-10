@@ -2,12 +2,11 @@ import { Helmet } from "react-helmet-async";
 import { FileText } from "lucide-react";
 import Header from "@/components/landing/Header";
 import Footer from "@/components/landing/Footer";
-import { useState } from "react";
-import LoanFormDialog from "@/components/loan-form/LoanFormDialog";
 
 const TermsOfService = () => {
-  const [formOpen, setFormOpen] = useState(false);
-  const handleOpenForm = () => setFormOpen(true);
+  const handleOpenForm = () => {
+    window.location.href = "https://trk.pawvetfund.com/click";
+  };
 
   return (
     <>
@@ -172,8 +171,6 @@ const TermsOfService = () => {
 
         <Footer />
       </div>
-
-      <LoanFormDialog open={formOpen} onOpenChange={setFormOpen} />
     </>
   );
 };

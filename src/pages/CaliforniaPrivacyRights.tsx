@@ -1,15 +1,11 @@
 import { Helmet } from "react-helmet-async";
-import { useState } from "react";
 import Header from "@/components/landing/Header";
 import Footer from "@/components/landing/Footer";
-import LoanFormDialog from "@/components/loan-form/LoanFormDialog";
 import { Shield, FileText, Trash2, Ban, Scale } from "lucide-react";
 
 const CaliforniaPrivacyRights = () => {
-  const [formOpen, setFormOpen] = useState(false);
-
   const handleOpenForm = () => {
-    setFormOpen(true);
+    window.location.href = "https://trk.pawvetfund.com/click";
   };
 
   const rights = [
@@ -161,8 +157,6 @@ const CaliforniaPrivacyRights = () => {
       </main>
 
       <Footer />
-
-      <LoanFormDialog open={formOpen} onOpenChange={setFormOpen} />
     </>
   );
 };

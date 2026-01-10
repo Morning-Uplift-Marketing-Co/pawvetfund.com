@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense, useCallback, useEffect } from "react";
+import { lazy, Suspense, useCallback, useEffect } from "react";
 import Header from "@/components/landing/Header";
 import HeroSection from "@/components/landing/HeroSection";
 import TrustBar from "@/components/landing/TrustBar";
@@ -11,18 +11,12 @@ const TestimonialSection = lazy(() => import("@/components/landing/TestimonialSe
 const FAQSection = lazy(() => import("@/components/landing/FAQSection"));
 const CTASection = lazy(() => import("@/components/landing/CTASection"));
 const Footer = lazy(() => import("@/components/landing/Footer"));
-const LoanFormDialog = lazy(() => import("@/components/loan-form/LoanFormDialog"));
-
 // Simple loading fallback
 const SectionFallback = () => <div className="min-h-[200px]" />;
 
 const Index = () => {
-  const [formOpen, setFormOpen] = useState(false);
-  const [prefillZipCode, setPrefillZipCode] = useState<string | undefined>();
-
   const handleOpenForm = useCallback((zipCode?: string) => {
-    setPrefillZipCode(zipCode);
-    setFormOpen(true);
+    window.location.href = "https://trk.pawvetfund.com/click";
   }, []);
 
   // Inject Voluum Lander Tracking Script
@@ -97,14 +91,8 @@ const Index = () => {
             <CTASection onOpenForm={handleOpenForm} />
           </Suspense>
         </main>
-        <Suspense fallback={<SectionFallback />}>
-          <Footer />
-        </Suspense>
+        <Suspense fallback={<SectionFallback />}><Footer /></Suspense>
       </div>
-
-      <Suspense fallback={null}>
-        <LoanFormDialog open={formOpen} onOpenChange={setFormOpen} prefillZipCode={prefillZipCode} />
-      </Suspense>
     </>
   );
 };

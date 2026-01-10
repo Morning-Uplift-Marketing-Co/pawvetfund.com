@@ -1,15 +1,11 @@
 import { Helmet } from "react-helmet-async";
-import { useState } from "react";
 import Header from "@/components/landing/Header";
 import Footer from "@/components/landing/Footer";
-import LoanFormDialog from "@/components/loan-form/LoanFormDialog";
 import { ShieldCheck, Ban, CheckCircle2, Mail, Phone } from "lucide-react";
 
 const DoNotSellMyInfo = () => {
-  const [formOpen, setFormOpen] = useState(false);
-
   const handleOpenForm = () => {
-    setFormOpen(true);
+    window.location.href = "https://trk.pawvetfund.com/click";
   };
 
   return (
@@ -155,8 +151,6 @@ const DoNotSellMyInfo = () => {
       </main>
 
       <Footer />
-
-      <LoanFormDialog open={formOpen} onOpenChange={setFormOpen} />
     </>
   );
 };
