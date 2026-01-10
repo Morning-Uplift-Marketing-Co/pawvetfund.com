@@ -1,9 +1,9 @@
 import { UseFormReturn } from "react-hook-form";
-import { LoanFormData, creditRanges, employmentStatuses } from "../formSchema";
+import { LoanFormData } from "../formSchema";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { DollarSign, CreditCard, User, Pencil, Shield } from "lucide-react";
+import { DollarSign, User, Pencil, Shield } from "lucide-react";
 
 interface ReviewStepProps {
   form: UseFormReturn<LoanFormData>;
@@ -12,18 +12,8 @@ interface ReviewStepProps {
 
 const ReviewStep = ({ form, onEditStep }: ReviewStepProps) => {
   const values = form.watch();
-  
-  const creditLabel = creditRanges.find(c => c.value === values.creditRange);
-  const employmentLabel = employmentStatuses.find(e => e.value === values.employmentStatus)?.label || "";
 
-  // Calculate estimated monthly payment range
-  const minApr = values.creditRange === "excellent" ? 5.99 : 
-                 values.creditRange === "good" ? 10.99 :
-                 values.creditRange === "fair" ? 15.99 : 20.99;
-  const maxApr = values.creditRange === "excellent" ? 12.99 : 
-                 values.creditRange === "good" ? 18.99 :
-                 values.creditRange === "fair" ? 25.99 : 35.99;
-  
+  // Calculate estimated monthly payment range (using average APR)
   const calculateMonthly = (apr: number) => {
     const monthlyRate = apr / 100 / 12;
     const months = 36;
@@ -31,8 +21,8 @@ const ReviewStep = ({ form, onEditStep }: ReviewStepProps) => {
            (Math.pow(1 + monthlyRate, months) - 1);
   };
 
-  const minMonthly = calculateMonthly(minApr).toFixed(0);
-  const maxMonthly = calculateMonthly(maxApr).toFixed(0);
+  const minMonthly = calculateMonthly(10.99).toFixed(0);
+  const maxMonthly = calculateMonthly(25.99).toFixed(0);
 
   return (
     <div className="space-y-6">
@@ -57,29 +47,6 @@ const ReviewStep = ({ form, onEditStep }: ReviewStepProps) => {
           </div>
         </div>
 
-        {/* Credit Profile */}
-        <div className="p-4 rounded-lg border bg-card">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2">
-              <CreditCard className="w-5 h-5 text-primary" />
-              <span className="font-semibold">Credit Profile</span>
-            </div>
-            <Button variant="ghost" size="sm" onClick={() => onEditStep(2)}>
-              <Pencil className="w-4 h-4" />
-            </Button>
-          </div>
-          <div className="space-y-1 text-sm">
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Credit Score:</span>
-              <span className="font-medium">{creditLabel?.label} ({creditLabel?.range})</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Employment:</span>
-              <span className="font-medium">{employmentLabel}</span>
-            </div>
-          </div>
-        </div>
-
         {/* Contact Info */}
         <div className="p-4 rounded-lg border bg-card">
           <div className="flex items-center justify-between mb-3">
@@ -87,7 +54,7 @@ const ReviewStep = ({ form, onEditStep }: ReviewStepProps) => {
               <User className="w-5 h-5 text-primary" />
               <span className="font-semibold">Contact Information</span>
             </div>
-            <Button variant="ghost" size="sm" onClick={() => onEditStep(3)}>
+            <Button variant="ghost" size="sm" onClick={() => onEditStep(2)}>
               <Pencil className="w-4 h-4" />
             </Button>
           </div>

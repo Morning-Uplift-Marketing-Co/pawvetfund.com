@@ -4,14 +4,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loanFormSchema, LoanFormData, defaultFormValues } from "./formSchema";
 import StepIndicator from "./StepIndicator";
 import LoanAmountStep from "./steps/LoanAmountStep";
-import CreditProfileStep from "./steps/CreditProfileStep";
 import ContactInfoStep from "./steps/ContactInfoStep";
 import ReviewStep from "./steps/ReviewStep";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, CheckCircle, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-const stepLabels = ["Amount", "Credit", "Contact", "Review"];
+const stepLabels = ["Amount", "Contact", "Review"];
 
 interface LoanApplicationFormProps {
   onClose?: () => void;
@@ -40,12 +39,9 @@ const LoanApplicationForm = ({ onClose, prefillZipCode }: LoanApplicationFormPro
         fieldsToValidate = ["loanAmount"];
         break;
       case 2:
-        fieldsToValidate = ["creditRange", "employmentStatus"];
-        break;
-      case 3:
         fieldsToValidate = ["firstName", "lastName", "email", "phone", "zipCode"];
         break;
-      case 4:
+      case 3:
         fieldsToValidate = ["agreeToTerms"];
         break;
     }
@@ -56,7 +52,7 @@ const LoanApplicationForm = ({ onClose, prefillZipCode }: LoanApplicationFormPro
 
   const handleNext = async () => {
     const isValid = await validateCurrentStep();
-    if (isValid && currentStep < 4) {
+    if (isValid && currentStep < 3) {
       setCurrentStep(prev => prev + 1);
     }
   };
@@ -93,10 +89,8 @@ const LoanApplicationForm = ({ onClose, prefillZipCode }: LoanApplicationFormPro
       case 1:
         return <LoanAmountStep form={form} />;
       case 2:
-        return <CreditProfileStep form={form} />;
-      case 3:
         return <ContactInfoStep form={form} />;
-      case 4:
+      case 3:
         return <ReviewStep form={form} onEditStep={handleEditStep} />;
       default:
         return null;
@@ -107,7 +101,7 @@ const LoanApplicationForm = ({ onClose, prefillZipCode }: LoanApplicationFormPro
     <div className="w-full max-w-lg mx-auto">
       <StepIndicator 
         currentStep={currentStep} 
-        totalSteps={4} 
+        totalSteps={3} 
         stepLabels={stepLabels} 
       />
 
@@ -129,7 +123,7 @@ const LoanApplicationForm = ({ onClose, prefillZipCode }: LoanApplicationFormPro
             Back
           </Button>
 
-          {currentStep < 4 ? (
+          {currentStep < 3 ? (
             <Button
               type="button"
               onClick={handleNext}

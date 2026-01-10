@@ -2,8 +2,6 @@ import { z } from "zod";
 
 export const loanFormSchema = z.object({
   loanAmount: z.number().min(500, "Minimum amount is $500").max(5000, "Maximum amount is $5,000"),
-  creditRange: z.string().min(1, "Please select your credit range"),
-  employmentStatus: z.string().min(1, "Please select employment status"),
   firstName: z.string().min(2, "First name must be at least 2 characters").regex(/^[a-zA-Z\s-]+$/, "Letters only"),
   lastName: z.string().min(2, "Last name must be at least 2 characters").regex(/^[a-zA-Z\s-]+$/, "Letters only"),
   email: z.string().email("Please enter a valid email address"),
@@ -16,8 +14,6 @@ export type LoanFormData = z.infer<typeof loanFormSchema>;
 
 export const defaultFormValues: LoanFormData = {
   loanAmount: 2500,
-  creditRange: "",
-  employmentStatus: "",
   firstName: "",
   lastName: "",
   email: "",
