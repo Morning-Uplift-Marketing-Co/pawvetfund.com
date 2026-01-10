@@ -10,7 +10,7 @@ import heroImageJpg from "@/assets/hero-vet.jpg?w=640;960;1280&format=jpg&as=src
 import heroImageFallback from "@/assets/hero-vet.jpg?w=960";
 
 interface HeroSectionProps {
-  onOpenForm: () => void;
+  onOpenForm: (zipCode?: string) => void;
 }
 
 interface ZipLookupResult {
@@ -24,6 +24,21 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
   const [isZipValid, setIsZipValid] = useState(false);
   const [cityInfo, setCityInfo] = useState<ZipLookupResult | null>(null);
   const [isLoadingCity, setIsLoadingCity] = useState(false);
+  const [autoSubmitTimer, setAutoSubmitTimer] = useState<NodeJS.Timeout | null>(null);
+
+  // Auto-submit after 1 second when ZIP is valid
+  useEffect(() => {
+    if (isZipValid && cityInfo && !isLoadingCity) {
+      const timer = setTimeout(() => {
+        onOpenForm(zipCode);
+      }, 1000);
+      setAutoSubmitTimer(timer);
+      return () => clearTimeout(timer);
+    }
+    return () => {
+      if (autoSubmitTimer) clearTimeout(autoSubmitTimer);
+    };
+  }, [isZipValid, cityInfo, isLoadingCity, zipCode, onOpenForm]);
 
   // Lookup city when ZIP is 5 digits
   useEffect(() => {
@@ -64,6 +79,9 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
   }, [zipCode]);
 
   const handleZipSubmit = () => {
+    // Cancel auto-submit timer if user clicks manually
+    if (autoSubmitTimer) clearTimeout(autoSubmitTimer);
+    
     const zipRegex = /^\d{5}$/;
     if (!zipRegex.test(zipCode)) {
       setZipError("Enter valid 5-digit ZIP");
@@ -75,7 +93,7 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
       return;
     }
     setZipError("");
-    onOpenForm();
+    onOpenForm(zipCode);
   };
 
   const handleZipChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -205,7 +223,7 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
               
               {/* Secondary CTA */}
               <button 
-                onClick={onOpenForm}
+                onClick={() => onOpenForm()}
                 className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group"
               >
                 <CheckCircle className="w-4 h-4" />
