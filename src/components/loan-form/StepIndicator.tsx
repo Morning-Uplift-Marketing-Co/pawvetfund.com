@@ -8,9 +8,9 @@ interface StepIndicatorProps {
 
 const StepIndicator = ({ currentStep, totalSteps, stepLabels }: StepIndicatorProps) => {
   return (
-    <div className="w-full mb-8">
-      {/* Progress dots */}
-      <div className="flex items-center justify-center gap-2">
+    <div className="w-full mb-6">
+      {/* Progress bar */}
+      <div className="flex items-center gap-1.5">
         {stepLabels.map((_, index) => {
           const stepNumber = index + 1;
           const isCompleted = stepNumber < currentStep;
@@ -20,10 +20,8 @@ const StepIndicator = ({ currentStep, totalSteps, stepLabels }: StepIndicatorPro
             <div
               key={stepNumber}
               className={cn(
-                "h-1.5 rounded-full transition-all duration-500",
-                isCurrent ? "w-8 bg-primary" : "w-1.5",
-                isCompleted ? "bg-primary" : "bg-muted",
-                !isCompleted && !isCurrent && "bg-muted"
+                "h-1 flex-1 rounded-full transition-all duration-300",
+                isCompleted || isCurrent ? "bg-primary" : "bg-border"
               )}
             />
           );
@@ -31,8 +29,8 @@ const StepIndicator = ({ currentStep, totalSteps, stepLabels }: StepIndicatorPro
       </div>
       
       {/* Step label */}
-      <p className="text-center text-sm text-muted-foreground mt-4">
-        Step {currentStep} of {totalSteps} · <span className="text-foreground font-medium">{stepLabels[currentStep - 1]}</span>
+      <p className="text-center text-xs text-muted-foreground mt-3">
+        Step {currentStep} of {totalSteps}
       </p>
     </div>
   );
