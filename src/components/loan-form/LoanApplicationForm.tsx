@@ -7,8 +7,9 @@ import LoanAmountStep from "./steps/LoanAmountStep";
 import ContactInfoStep from "./steps/ContactInfoStep";
 import ReviewStep from "./steps/ReviewStep";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight, CheckCircle, Loader2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 
 const stepLabels = ["Amount", "Contact", "Review"];
 
@@ -70,7 +71,6 @@ const LoanApplicationForm = ({ onClose, prefillZipCode }: LoanApplicationFormPro
   const onSubmit = async (data: LoanFormData) => {
     setIsSubmitting(true);
     
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 2000));
     
     console.log("Form submitted:", data);
@@ -98,7 +98,7 @@ const LoanApplicationForm = ({ onClose, prefillZipCode }: LoanApplicationFormPro
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto">
+    <div className="w-full max-w-md mx-auto">
       <StepIndicator 
         currentStep={currentStep} 
         totalSteps={3} 
@@ -106,49 +106,49 @@ const LoanApplicationForm = ({ onClose, prefillZipCode }: LoanApplicationFormPro
       />
 
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="min-h-[400px]">
+        <div className="min-h-[380px]">
           {renderStep()}
         </div>
 
-        {/* Navigation Buttons */}
-        <div className="flex justify-between pt-6 mt-6 border-t">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={handlePrev}
-            disabled={currentStep === 1}
-            className="gap-2"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back
-          </Button>
+        {/* Navigation */}
+        <div className="flex items-center gap-3 pt-6">
+          {currentStep > 1 && (
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              onClick={handlePrev}
+              className="rounded-full w-12 h-12"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </Button>
+          )}
 
           {currentStep < 3 ? (
             <Button
               type="button"
               onClick={handleNext}
-              className="gap-2"
+              className={cn(
+                "flex-1 h-14 rounded-2xl text-base font-semibold gap-2",
+                currentStep === 1 && "ml-0"
+              )}
             >
               Continue
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-5 h-5" />
             </Button>
           ) : (
             <Button
               type="submit"
-              variant="hero"
               disabled={isSubmitting}
-              className="gap-2"
+              className="flex-1 h-14 rounded-2xl text-base font-semibold"
             >
               {isSubmitting ? (
                 <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  Submitting...
+                  <Loader2 className="w-5 h-5 animate-spin mr-2" />
+                  Checking rates...
                 </>
               ) : (
-                <>
-                  Check My Rates — Free
-                  <CheckCircle className="w-4 h-4" />
-                </>
+                "Check My Rates — Free"
               )}
             </Button>
           )}

@@ -2,8 +2,7 @@ import { UseFormReturn } from "react-hook-form";
 import { LoanFormData } from "../formSchema";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "@/components/ui/button";
-import { DollarSign, User, Pencil, Shield } from "lucide-react";
+import { Pencil, Lock } from "lucide-react";
 
 interface ReviewStepProps {
   form: UseFormReturn<LoanFormData>;
@@ -13,7 +12,7 @@ interface ReviewStepProps {
 const ReviewStep = ({ form, onEditStep }: ReviewStepProps) => {
   const values = form.watch();
 
-  // Calculate estimated monthly payment range (using average APR)
+  // Calculate estimated monthly payment range
   const calculateMonthly = (apr: number) => {
     const monthlyRate = apr / 100 / 12;
     const months = 36;
@@ -26,92 +25,71 @@ const ReviewStep = ({ form, onEditStep }: ReviewStepProps) => {
 
   return (
     <div className="space-y-6">
-      {/* Summary Cards */}
-      <div className="space-y-4">
-        {/* Loan Details */}
-        <div className="p-4 rounded-lg border bg-card">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2">
-              <DollarSign className="w-5 h-5 text-primary" />
-              <span className="font-semibold">Loan Details</span>
-            </div>
-            <Button variant="ghost" size="sm" onClick={() => onEditStep(1)}>
-              <Pencil className="w-4 h-4" />
-            </Button>
-          </div>
-          <div className="space-y-1 text-sm">
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Amount:</span>
-              <span className="font-medium">${values.loanAmount?.toLocaleString()}</span>
-            </div>
+      {/* Estimated Payment - Hero */}
+      <div className="text-center py-6 bg-gradient-to-b from-primary/5 to-transparent rounded-3xl">
+        <p className="text-sm text-muted-foreground mb-1">Estimated monthly</p>
+        <p className="text-4xl font-bold text-foreground">${minMonthly} – ${maxMonthly}</p>
+        <p className="text-xs text-muted-foreground mt-2">36 months · Rates vary by lender</p>
+      </div>
+
+      {/* Summary */}
+      <div className="space-y-3">
+        <div className="flex items-center justify-between py-3 border-b">
+          <span className="text-muted-foreground">Amount</span>
+          <div className="flex items-center gap-2">
+            <span className="font-semibold">${values.loanAmount?.toLocaleString()}</span>
+            <button type="button" onClick={() => onEditStep(1)} className="p-1 hover:bg-muted rounded-md transition-colors">
+              <Pencil className="w-3.5 h-3.5 text-muted-foreground" />
+            </button>
           </div>
         </div>
-
-        {/* Contact Info */}
-        <div className="p-4 rounded-lg border bg-card">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2">
-              <User className="w-5 h-5 text-primary" />
-              <span className="font-semibold">Contact Information</span>
-            </div>
-            <Button variant="ghost" size="sm" onClick={() => onEditStep(2)}>
-              <Pencil className="w-4 h-4" />
-            </Button>
-          </div>
-          <div className="space-y-1 text-sm">
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Name:</span>
-              <span className="font-medium">{values.firstName} {values.lastName}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Email:</span>
-              <span className="font-medium">{values.email}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Phone:</span>
-              <span className="font-medium">{values.phone}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">ZIP:</span>
-              <span className="font-medium">{values.zipCode}</span>
-            </div>
+        
+        <div className="flex items-center justify-between py-3 border-b">
+          <span className="text-muted-foreground">Name</span>
+          <div className="flex items-center gap-2">
+            <span className="font-semibold">{values.firstName} {values.lastName}</span>
+            <button type="button" onClick={() => onEditStep(2)} className="p-1 hover:bg-muted rounded-md transition-colors">
+              <Pencil className="w-3.5 h-3.5 text-muted-foreground" />
+            </button>
           </div>
         </div>
-
-        {/* Estimated Payment */}
-        <div className="p-4 rounded-lg border-2 border-primary/20 bg-primary/5">
-          <div className="text-center">
-            <p className="text-sm text-muted-foreground mb-1">Estimated Monthly Payment</p>
-            <p className="text-2xl font-bold text-primary">${minMonthly} - ${maxMonthly}</p>
-            <p className="text-xs text-muted-foreground mt-1">Based on 36-month term</p>
-          </div>
+        
+        <div className="flex items-center justify-between py-3 border-b">
+          <span className="text-muted-foreground">Email</span>
+          <span className="font-semibold">{values.email}</span>
+        </div>
+        
+        <div className="flex items-center justify-between py-3">
+          <span className="text-muted-foreground">Phone</span>
+          <span className="font-semibold">{values.phone}</span>
         </div>
       </div>
 
       {/* Terms Agreement */}
-      <div className="space-y-4 pt-4 border-t">
-        <div className="flex items-start gap-3">
+      <div className="pt-4">
+        <label className="flex items-start gap-3 cursor-pointer group">
           <Checkbox
             id="agreeToTerms"
             checked={values.agreeToTerms}
             onCheckedChange={(checked) => form.setValue("agreeToTerms", checked as boolean)}
+            className="mt-0.5"
           />
-          <Label htmlFor="agreeToTerms" className="text-sm leading-relaxed cursor-pointer">
+          <span className="text-sm text-muted-foreground leading-relaxed group-hover:text-foreground transition-colors">
             I agree to the{" "}
-            <a href="/terms" className="text-primary underline hover:no-underline">Terms of Service</a>
+            <a href="/terms" className="text-primary hover:underline">Terms</a>
             {" "}and{" "}
-            <a href="/privacy" className="text-primary underline hover:no-underline">Privacy Policy</a>.
-            I consent to be contacted by lenders regarding my loan request.
-          </Label>
-        </div>
+            <a href="/privacy" className="text-primary hover:underline">Privacy Policy</a>
+          </span>
+        </label>
         {form.formState.errors.agreeToTerms && (
-          <p className="text-sm text-destructive">{form.formState.errors.agreeToTerms.message}</p>
+          <p className="text-sm text-destructive mt-2">{form.formState.errors.agreeToTerms.message}</p>
         )}
+      </div>
 
-        <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/50 p-3 rounded-lg">
-          <Shield className="w-4 h-4 text-trust flex-shrink-0" />
-          <span>Your information is protected with 256-bit SSL encryption</span>
-        </div>
+      {/* Security Badge */}
+      <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
+        <Lock className="w-3.5 h-3.5" />
+        <span>256-bit encryption · No credit impact</span>
       </div>
     </div>
   );
