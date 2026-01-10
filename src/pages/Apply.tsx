@@ -17,6 +17,41 @@ const Apply = () => {
 
   const hasFormData = Object.values(formData).some(value => value !== "");
 
+  // Inject Voluum Offer Tracking Script
+  useEffect(() => {
+    // Add delegate-ch meta tag
+    const metaTag = document.createElement('meta');
+    metaTag.setAttribute('http-equiv', 'delegate-ch');
+    metaTag.setAttribute('content', 'sec-ch-ua https://trk.pawvetfund.com; sec-ch-ua-mobile https://trk.pawvetfund.com; sec-ch-ua-arch https://trk.pawvetfund.com; sec-ch-ua-model https://trk.pawvetfund.com; sec-ch-ua-platform https://trk.pawvetfund.com; sec-ch-ua-platform-version https://trk.pawvetfund.com; sec-ch-ua-bitness https://trk.pawvetfund.com; sec-ch-ua-full-version-list https://trk.pawvetfund.com; sec-ch-ua-full-version https://trk.pawvetfund.com');
+    document.head.appendChild(metaTag);
+
+    // Add style
+    const style = document.createElement('style');
+    style.textContent = '.dtpcnt{opacity: 0;}';
+    document.head.appendChild(style);
+
+    // Inject tracking script
+    const script = document.createElement('script');
+    script.textContent = `(function(b,d,g,k,u,e,p,v,l,m,n,f,q,w,r){function t(a){var c=d.cookie.match(new RegExp("(^| )"+a+"=([^;]+)"));return c?c.pop():g.getItem(a+"-expires")&&+g.getItem(a+"-expires")>(new Date).getTime()?g.getItem(a):null}r="https:"===b.location.protocol?"secure; ":"";b[e]||(b[e]=function(a){b[e].state.callbackQueue.push(a)},b[e].state={callbackQueue:[]},b[e].registerConversion=function(a){b[e].state.callbackQueue.push(a)},function(){(n=RegExp("[?&]cpid(=([^&#]*)|&|#|$)").exec(b.location.href))&&n[2]&&(f=n[2],q=t("vl-"+f));var a=t("vl-cid"),c;"savedCid"!==v||!a||f&&"undefined"!==typeof f||(c=a);l=d.createElement("script");m=d.scripts[0];l.src=p+(-1===p.indexOf("?")?"?":"&")+"oref="+k(d.referrer)+"&ourl="+k(location[u])+"&opt="+k(d.title)+"&vtm="+(new Date).getTime()+(c?"&cid="+c:"")+(q?"&uw=no":"");m.parentNode.insertBefore(l,m);if(f){a="vl-"+f;c=r;var h=new Date;h.setTime(h.getTime()+864E5);d.cookie=a+"=1; "+c+"samesite=Strict; expires="+h.toGMTString()+"; path=/";g.setItem(a,"1");g.setItem(a+"-expires",h.getTime())}}())})(window,document,localStorage,encodeURIComponent,"href","dtpCallback","https://trk.pawvetfund.com/d/.js","savedCid");`;
+    document.head.appendChild(script);
+
+    // Add noscript fallback
+    const noscript = document.createElement('noscript');
+    const noscriptLink = document.createElement('link');
+    noscriptLink.setAttribute('href', 'https://trk.pawvetfund.com/d/.js?noscript=true&ourl=');
+    noscriptLink.setAttribute('rel', 'stylesheet');
+    noscript.appendChild(noscriptLink);
+    document.head.appendChild(noscript);
+
+    return () => {
+      // Cleanup
+      if (document.head.contains(metaTag)) document.head.removeChild(metaTag);
+      if (document.head.contains(style)) document.head.removeChild(style);
+      if (document.head.contains(script)) document.head.removeChild(script);
+      if (document.head.contains(noscript)) document.head.removeChild(noscript);
+    };
+  }, []);
+
   useEffect(() => {
     // Build the API Keep form URL with parameters
     let formUrl = "https://apikeep.com/form/applicationInit.js";

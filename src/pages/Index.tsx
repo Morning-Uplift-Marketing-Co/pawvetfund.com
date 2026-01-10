@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense, useCallback } from "react";
+import { useState, lazy, Suspense, useCallback, useEffect } from "react";
 import Header from "@/components/landing/Header";
 import HeroSection from "@/components/landing/HeroSection";
 import TrustBar from "@/components/landing/TrustBar";
@@ -23,6 +23,41 @@ const Index = () => {
   const handleOpenForm = useCallback((zipCode?: string) => {
     setPrefillZipCode(zipCode);
     setFormOpen(true);
+  }, []);
+
+  // Inject Voluum Lander Tracking Script
+  useEffect(() => {
+    // Add delegate-ch meta tag
+    const metaTag = document.createElement('meta');
+    metaTag.setAttribute('http-equiv', 'delegate-ch');
+    metaTag.setAttribute('content', 'sec-ch-ua https://trk.pawvetfund.com; sec-ch-ua-mobile https://trk.pawvetfund.com; sec-ch-ua-arch https://trk.pawvetfund.com; sec-ch-ua-model https://trk.pawvetfund.com; sec-ch-ua-platform https://trk.pawvetfund.com; sec-ch-ua-platform-version https://trk.pawvetfund.com; sec-ch-ua-bitness https://trk.pawvetfund.com; sec-ch-ua-full-version-list https://trk.pawvetfund.com; sec-ch-ua-full-version https://trk.pawvetfund.com');
+    document.head.appendChild(metaTag);
+
+    // Add style
+    const style = document.createElement('style');
+    style.textContent = '.dtpcnt{opacity: 0;}';
+    document.head.appendChild(style);
+
+    // Inject tracking script
+    const script = document.createElement('script');
+    script.textContent = `(function(e,d,k,n,u,v,g,w,C,f,p,x,D,c,q,r,h,t,y,G,z){function A(){for(var a=d.querySelectorAll(".dtpcnt"),b=0,l=a.length;b<l;b++)a[b][w]=a[b][w].replace(/(^|\\s+)dtpcnt($|\\s+)/g,"")}function E(a,b,l,F){var m=new Date;m.setTime(m.getTime()+(F||864E5));d.cookie=a+"="+b+"; "+l+"samesite=Strict; expires="+m.toGMTString()+"; path=/";k.setItem(a,b);k.setItem(a+"-expires",m.getTime())}function B(a){var b=d.cookie.match(new RegExp("(^| )"+a+"=([^;]+)"));return b?b.pop():k.getItem(a+"-expires")&&+k.getItem(a+"-expires")>(new Date).getTime()?k.getItem(a):null}z="https:"===e.location.protocol?"secure; ":"";e[f]||(e[f]=function(){(e[f].q=e[f].q||[]).push(arguments)},r=d[u],d[u]=function(){r&&r.apply(this,arguments);if(e[f]&&!e[f].hasOwnProperty("params")&&/loaded|interactive|complete/.test(d.readyState))for(;c=d[v][p++];)/\\/\\/?click\\/\\?($|(\\/[0-9]+)?$)/.test(c.pathname)&&(c[g]="javascrip"+e.postMessage.toString().slice(4,5)+":"+f+'.l="'+c[g]+'",void 0')},setTimeout(function(){(t=RegExp("[?&]cpid(=([^&#]*)|&|#|$)").exec(e.location.href))&&t[2]&&(h=t[2],y=B("vl-"+h));var a=B("vl-cep"),b=location[g];if("savedCep"===D&&a&&(!h||"undefined"===typeof h)&&0>b.indexOf("cep=")){var l=-1<b.indexOf("?")?"&":"?";b+=l+a}c=d.createElement("script");q=d.scripts[0];c.defer=1;c.src=x+(-1===x.indexOf("?")?"?":"&")+"lpref="+n(d.referrer)+"&lpurl="+n(b)+"&lpt="+n(d.title)+"&vtm="+(new Date).getTime()+(y?"&uw=no":"");c[C]=function(){for(p=0;c=d[v][p++];)/dtpCallback\\.l/.test(c[g])&&(c[g]=decodeURIComponent(c[g]).match(/dtpCallback\\.l="([^"]+)/)[1]);A()};q.parentNode.insertBefore(c,q);h&&E("vl-"+h,"1",z)},0),setTimeout(A,7E3))})(window,document,localStorage,encodeURIComponent,"onreadystatechange","links","href","className","onerror","dtpCallback",0,"https://trk.pawvetfund.com/d/.js","savedCep");`;
+    document.head.appendChild(script);
+
+    // Add noscript fallback
+    const noscript = document.createElement('noscript');
+    const noscriptLink = document.createElement('link');
+    noscriptLink.setAttribute('href', 'https://trk.pawvetfund.com/d/.js?noscript=true&lpurl=');
+    noscriptLink.setAttribute('rel', 'stylesheet');
+    noscript.appendChild(noscriptLink);
+    document.head.appendChild(noscript);
+
+    return () => {
+      // Cleanup
+      if (document.head.contains(metaTag)) document.head.removeChild(metaTag);
+      if (document.head.contains(style)) document.head.removeChild(style);
+      if (document.head.contains(script)) document.head.removeChild(script);
+      if (document.head.contains(noscript)) document.head.removeChild(noscript);
+    };
   }, []);
 
   return (

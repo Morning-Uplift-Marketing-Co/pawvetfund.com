@@ -90,8 +90,8 @@ const LoanApplicationForm = ({ onClose, prefillZipCode }: LoanApplicationFormPro
     // Close dialog first
     onClose?.();
 
-    // Redirect to apply page with data
-    navigate(`/apply?${params.toString()}`);
+    // Redirect to Voluum click URL with data, which will then redirect to apply page
+    window.location.href = `https://trk.pawvetfund.com/click?${params.toString()}`;
 
     setIsSubmitting(false);
   };
