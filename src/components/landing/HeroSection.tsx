@@ -217,14 +217,6 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
                 </Button>
               </div>
               
-              {/* Secondary CTA */}
-              <button 
-                onClick={() => onOpenForm()}
-                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group"
-              >
-                <CheckCircle className="w-4 h-4" />
-                <span className="underline underline-offset-2">Skip ZIP — Check Your Rate Now</span>
-              </button>
             </div>
 
             {/* Quick Benefits */}
