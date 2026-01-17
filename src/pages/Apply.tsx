@@ -6,7 +6,7 @@ import { getClickId, getGclid } from '@/utils/tracking';
 // ⚠️ CONFIGURATION - UPDATE THESE VALUES
 // ============================================
 const LEADSGATE_CONFIG = {
-  aid: 'YOUR_AID',        // ← เปลี่ยนเป็น LeadsGate Affiliate ID
+  aid: '14881',        // ← เปลี่ยนเป็น LeadsGate Affiliate ID
   template: 'fresh',       // ← template: fresh, classic, modern
 };
 
