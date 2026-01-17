@@ -12,9 +12,9 @@ import {
 // ⚠️ CONFIGURATION - UPDATE THESE VALUES
 // ============================================
 const GOOGLE_ADS = {
-  conversionId: 'AW-XXXXXXXXX',      // ← เปลี่ยนเป็น Conversion ID จริง
-  formStartLabel: 'XXXXXXXXXXX',     // ← เปลี่ยนเป็น Label จริง (Secondary)
-  formSubmitLabel: 'XXXXXXXXXXX',    // ← เปลี่ยนเป็น Label จริง (Secondary)
+  conversionId: 'AW-778689947',      // ← เปลี่ยนเป็น Conversion ID จริง
+  formStartLabel: 'poFqCKrt7OYbEJu7p_MC',     // ← เปลี่ยนเป็น Label จริง (Secondary)
+  formSubmitLabel: 'hz4HCK3t7OYbEJu7p_MC',    // ← เปลี่ยนเป็น Label จริง (Secondary)
 };
 
 // ============================================
